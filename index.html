@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>Copa do Mundo 2026 • Tabela Completa • Brasil no Grupo C</title>
+    <title>Copa do Mundo 2026 • Tabela Completa com Pênaltis • Brasil no Grupo C</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -26,30 +26,19 @@
             background-attachment: fixed;
         }
 
-        /* ============ ANIMAÇÃO DO CAMPEÃO ============ */
+        /* Overlay do Campeão */
         .champion-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
             z-index: 9999;
             display: none;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            animation: overlayFadeIn 0.5s ease;
         }
-
-        .champion-overlay.active {
-            display: flex;
-        }
-
-        @keyframes overlayFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .champion-overlay.active { display: flex; }
 
         .champion-content {
             position: relative;
@@ -57,7 +46,6 @@
             text-align: center;
             animation: championEntrance 1.5s ease-out;
         }
-
         @keyframes championEntrance {
             0% { transform: scale(0); opacity: 0; }
             60% { transform: scale(1.1); opacity: 1; }
@@ -70,14 +58,12 @@
             filter: drop-shadow(0 0 30px rgba(254, 221, 0, 0.8));
             display: block;
         }
-
         @keyframes flagBounce {
             0% { transform: translateY(-200px); opacity: 0; }
             50% { transform: translateY(20px); opacity: 1; }
             70% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
         }
-
         @keyframes flagGlow {
             0%, 100% { filter: drop-shadow(0 0 30px rgba(254, 221, 0, 0.8)); }
             50% { filter: drop-shadow(0 0 60px rgba(254, 221, 0, 1)); }
@@ -90,13 +76,11 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: none;
             margin: 1rem 0;
             animation: nameGlow 2s infinite 2.1s;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
-
         @keyframes nameGlow {
             0%, 100% { filter: brightness(1); }
             50% { filter: brightness(1.5); }
@@ -109,7 +93,6 @@
             animation: subtitleFade 1s ease 2.5s both;
             letter-spacing: 2px;
         }
-
         @keyframes subtitleFade {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -120,7 +103,6 @@
             animation: trophyRise 2s ease-out 3s both;
             position: relative;
         }
-
         @keyframes trophyRise {
             0% { transform: translateY(300px) rotate(-10deg); opacity: 0; }
             60% { transform: translateY(-20px) rotate(3deg); opacity: 1; }
@@ -134,7 +116,6 @@
             filter: drop-shadow(0 0 40px rgba(254, 221, 0, 0.9));
             display: block;
         }
-
         @keyframes trophyGlow {
             0%, 100% { filter: drop-shadow(0 0 40px rgba(254, 221, 0, 0.9)); transform: scale(1); }
             50% { filter: drop-shadow(0 0 80px rgba(254, 221, 0, 1.5)); transform: scale(1.05); }
@@ -143,13 +124,11 @@
         .champion-flag-small {
             font-size: 4rem;
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             animation: flagOnTrophy 0.5s ease 4s both;
             filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
         }
-
         @keyframes flagOnTrophy {
             from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
             to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -157,15 +136,13 @@
 
         .close-champion {
             position: fixed;
-            top: 2rem;
-            right: 2rem;
+            top: 2rem; right: 2rem;
             z-index: 10002;
             background: rgba(255, 255, 255, 0.2);
             border: 2px solid #fedd00;
             color: #fedd00;
             font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border-radius: 50%;
             cursor: pointer;
             font-weight: 700;
@@ -175,56 +152,38 @@
             justify-content: center;
             animation: closeBtnFade 1s ease 5s both;
         }
-
         @keyframes closeBtnFade {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         .close-champion:hover {
             background: rgba(254, 221, 0, 0.3);
             transform: scale(1.1);
             box-shadow: 0 0 20px rgba(254, 221, 0, 0.5);
         }
 
-        /* Fogos de artifício - Estrelas douradas */
         .fireworks-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 10000;
         }
 
         .firework-star {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 4px; height: 4px;
             background: #fedd00;
             border-radius: 50%;
             animation: starBurst 2s ease-out forwards;
             box-shadow: 0 0 6px 2px rgba(254, 221, 0, 0.8), 0 0 12px 4px rgba(255, 170, 0, 0.5);
         }
-
         @keyframes starBurst {
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             50% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0.8; }
             100% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 0; }
         }
 
-        .firework-star.delayed {
-            animation-delay: 0.5s;
-        }
-        .firework-star.delayed2 {
-            animation-delay: 1s;
-        }
-        .firework-star.delayed3 {
-            animation-delay: 1.5s;
-        }
-
-        /* Estrela grande central */
         .big-star {
             position: absolute;
             font-size: 3rem;
@@ -232,34 +191,29 @@
             pointer-events: none;
             z-index: 10000;
         }
-
         @keyframes bigStarBurst {
             0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 1; }
             50% { transform: translate(var(--stx), var(--sty)) scale(1.5) rotate(180deg); opacity: 0.8; }
             100% { transform: translate(var(--sfx), var(--sfy)) scale(0) rotate(360deg); opacity: 0; }
         }
 
-        /* Confetes dourados */
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             background: #fedd00;
             animation: confettiFall 3s ease-in forwards;
             pointer-events: none;
             z-index: 10000;
         }
-
         @keyframes confettiFall {
             0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
-
         .confetti.green { background: #009c3b; }
         .confetti.blue { background: #0053b3; }
         .confetti.white { background: #fff; }
 
-        /* ============ RESTANTE DO CSS DA TABELA ============ */
+        /* ============ CONTAINER PRINCIPAL ============ */
         .container {
             max-width: 1500px;
             width: 100%;
@@ -289,12 +243,7 @@
             gap: 0.8rem;
         }
 
-        .title-section {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
+        .title-section { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 
         h1 {
             font-size: 1.8rem;
@@ -438,7 +387,6 @@
         }
 
         .group-card:hover { transform: translateY(-3px); border-color: #fedd00; }
-
         .group-card.brazil-group { border: 3px solid #fedd00; animation: pulse 2s infinite; }
 
         body.light-mode .group-card {
@@ -595,9 +543,68 @@
         }
 
         .bracket-round h3 { color: #fedd00; text-align: center; margin-bottom: 0.8rem; font-size: 1.1rem; }
-        .bracket-match { background: rgba(0, 83, 179, 0.2); border-radius: 1rem; padding: 0.5rem 0.8rem; margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; border: 1px solid rgba(254, 221, 0, 0.15); }
+        
+        .bracket-match {
+            background: rgba(0, 83, 179, 0.2);
+            border-radius: 1rem;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border: 1px solid rgba(254, 221, 0, 0.15);
+        }
+
         .bracket-team { font-weight: 700; font-size: 0.85rem; min-width: 130px; }
         .bracket-team.winner { color: #00ff55; }
+
+        .penalty-section {
+            background: rgba(254, 221, 0, 0.1);
+            border: 1px dashed rgba(254, 221, 0, 0.4);
+            border-radius: 0.8rem;
+            padding: 0.4rem 0.6rem;
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+            color: #fedd00;
+            width: 100%;
+        }
+
+        .penalty-label {
+            font-weight: 700;
+            font-size: 0.7rem;
+            color: #ffaa00;
+        }
+
+        .penalty-input {
+            width: 35px;
+            padding: 0.15rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 170, 0, 0.6);
+            border-radius: 0.5rem;
+            color: #ffaa00;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .penalty-input:focus {
+            outline: none;
+            border-color: #ffaa00;
+            box-shadow: 0 0 8px rgba(255, 170, 0, 0.5);
+        }
+
+        .penalty-winner {
+            color: #00ff55;
+            font-weight: 800;
+            font-size: 0.75rem;
+            margin-left: auto;
+        }
 
         .footer-note { margin-top: 1.5rem; text-align: center; font-size: 0.75rem; color: #fedd00; background: rgba(0, 0, 0, 0.3); padding: 0.4rem 1rem; border-radius: 2rem; }
         body.light-mode .footer-note { color: #006622; background: rgba(0, 156, 59, 0.1); }
@@ -709,11 +716,12 @@
                 matchDetails[`${g}-${r}-${m}`] = { date: rawMatches[idx][0], time: rawMatches[idx][1], home: rawMatches[idx][2], away: rawMatches[idx][3] };
             }
 
-            const STORAGE_KEY_GROUPS = 'copa2026_groupScores';
-            const STORAGE_KEY_KO = 'copa2026_koScores';
+            const STORAGE_KEY_GROUPS = 'copa2026v3_groupScores';
+            const STORAGE_KEY_KO = 'copa2026v3_koScores';
+            const STORAGE_KEY_PEN = 'copa2026v3_penScores';
 
             function loadFromStorage() { try { const gs = localStorage.getItem(STORAGE_KEY_GROUPS); if (gs) return JSON.parse(gs); } catch (e) {} return {}; }
-            function saveToStorage() { try { localStorage.setItem(STORAGE_KEY_GROUPS, JSON.stringify(groupScores)); localStorage.setItem(STORAGE_KEY_KO, JSON.stringify(koScores)); showSaveIndicator(); } catch (e) {} }
+            function saveToStorage() { try { localStorage.setItem(STORAGE_KEY_GROUPS, JSON.stringify(groupScores)); localStorage.setItem(STORAGE_KEY_KO, JSON.stringify(koScores)); localStorage.setItem(STORAGE_KEY_PEN, JSON.stringify(penScores)); showSaveIndicator(); } catch (e) {} }
 
             function showSaveIndicator() {
                 const indicator = document.getElementById('saveIndicator');
@@ -725,13 +733,33 @@
 
             const groupScores = loadFromStorage();
             let koScores = {};
+            let penScores = {};
             try { const ks = localStorage.getItem(STORAGE_KEY_KO); if (ks) koScores = JSON.parse(ks); } catch (e) {}
+            try { const ps = localStorage.getItem(STORAGE_KEY_PEN); if (ps) penScores = JSON.parse(ps); } catch (e) {}
 
             function getGroupScore(g, r, m) { return groupScores[`${g}-${r}-${m}`] || null; }
             function setGroupScore(g, r, m, h, a) { const k = `${g}-${r}-${m}`; if (h === '' && a === '') delete groupScores[k]; else groupScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null }; saveToStorage(); }
             function isComplete(s) { return s && s.home !== null && s.away !== null && !isNaN(s.home) && !isNaN(s.away); }
+            
             function getKoScore(round, m) { return koScores[`${round}-${m}`] || null; }
             function setKoScore(round, m, h, a) { const k = `${round}-${m}`; if (h === '' && a === '') delete koScores[k]; else koScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null }; saveToStorage(); }
+            
+            function getPenScore(round, m) { return penScores[`${round}-${m}`] || null; }
+            function setPenScore(round, m, h, a) { const k = `${round}-${m}`; if (h === '' && a === '') delete penScores[k]; else penScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null }; saveToStorage(); }
+            function isPenComplete(s) { return s && s.home !== null && s.away !== null && !isNaN(s.home) && !isNaN(s.away); }
+
+            function getKoWinnerWithPenalties(round, m, t1, t2) {
+                const sc = getKoScore(round, m);
+                if (!sc || !isComplete(sc)) return null;
+                if (sc.home > sc.away) return t1;
+                if (sc.away > sc.home) return t2;
+                // Empate - verificar pênaltis
+                const pen = getPenScore(round, m);
+                if (!pen || !isPenComplete(pen)) return null;
+                if (pen.home > pen.away) return t1;
+                if (pen.away > pen.home) return t2;
+                return null;
+            }
 
             function calcStandings(gi) {
                 const teams = groupsData[gi].slice(1);
@@ -776,25 +804,23 @@
                 const matches = [];
                 const fSorted = [...firsts].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
                 const sSorted = [...seconds].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
-                for (let i = 0; i < 8; i++) matches.push({ t1: fSorted[i].team, t2: thirds[i]?.team || "?", g1: fSorted[i].group, g2: thirds[i]?.group || "?" });
+                for (let i = 0; i < 8; i++) matches.push({ t1: fSorted[i].team, t2: thirds[i]?.team || "?" });
                 const rf = fSorted.slice(8);
-                for (let i = 0; i < 4; i++) matches.push({ t1: rf[i]?.team || "?", t2: sSorted[i + 8]?.team || sSorted[i]?.team || "?", g1: rf[i]?.group || "?", g2: sSorted[i + 8]?.group || "?" });
-                for (let i = 0; i < 4; i++) matches.push({ t1: sSorted[i].team, t2: sSorted[i + 4].team, g1: sSorted[i].group, g2: sSorted[i + 4].group });
+                for (let i = 0; i < 4; i++) matches.push({ t1: rf[i]?.team || "?", t2: sSorted[i + 8]?.team || sSorted[i]?.team || "?" });
+                for (let i = 0; i < 4; i++) matches.push({ t1: sSorted[i].team, t2: sSorted[i + 4].team });
                 return matches.slice(0, 16);
             }
 
-            function getKoWinner(round, m, t1, t2) { const sc = getKoScore(round, m); if (!sc || !isComplete(sc)) return null; return sc.home > sc.away ? t1 : sc.away > sc.home ? t2 : null; }
-
             function simulateBracket(r32) {
-                const w32 = []; for (let i = 0; i < 16; i++) w32.push(getKoWinner('r32', i, r32[i].t1, r32[i].t2) || `Vencedor ${i + 1}`);
+                const w32 = []; for (let i = 0; i < 16; i++) w32.push(getKoWinnerWithPenalties('r32', i, r32[i].t1, r32[i].t2) || `Vencedor ${i + 1}`);
                 const r16 = []; for (let i = 0; i < 8; i++) r16.push({ t1: w32[i * 2], t2: w32[i * 2 + 1] });
-                const w16 = []; for (let i = 0; i < 8; i++) w16.push(getKoWinner('r16', i, r16[i].t1, r16[i].t2) || `Vencedor O${i + 1}`);
+                const w16 = []; for (let i = 0; i < 8; i++) w16.push(getKoWinnerWithPenalties('r16', i, r16[i].t1, r16[i].t2) || `Vencedor O${i + 1}`);
                 const qf = []; for (let i = 0; i < 4; i++) qf.push({ t1: w16[i * 2], t2: w16[i * 2 + 1] });
-                const wqf = []; for (let i = 0; i < 4; i++) wqf.push(getKoWinner('qf', i, qf[i].t1, qf[i].t2) || `Vencedor Q${i + 1}`);
+                const wqf = []; for (let i = 0; i < 4; i++) wqf.push(getKoWinnerWithPenalties('qf', i, qf[i].t1, qf[i].t2) || `Vencedor Q${i + 1}`);
                 const sf = [{ t1: wqf[0], t2: wqf[1] }, { t1: wqf[2], t2: wqf[3] }];
-                const wsf = []; for (let i = 0; i < 2; i++) wsf.push(getKoWinner('sf', i, sf[i].t1, sf[i].t2) || `Vencedor S${i + 1}`);
+                const wsf = []; for (let i = 0; i < 2; i++) wsf.push(getKoWinnerWithPenalties('sf', i, sf[i].t1, sf[i].t2) || `Vencedor S${i + 1}`);
                 const fin = { t1: wsf[0], t2: wsf[1] };
-                const champ = getKoWinner('final', 0, fin.t1, fin.t2);
+                const champ = getKoWinnerWithPenalties('final', 0, fin.t1, fin.t2);
                 return { r16, qf, sf, fin, champ };
             }
 
@@ -808,29 +834,15 @@
 
             function showChampionAnimation(championTeam) {
                 const { flag, name } = extractFlagAndName(championTeam);
-                const overlay = document.getElementById('championOverlay');
-                const championFlag = document.getElementById('championFlag');
-                const championName = document.getElementById('championName');
-                const championFlagSmall = document.getElementById('championFlagSmall');
-                const fireworksContainer = document.getElementById('fireworksContainer');
-
-                championFlag.textContent = flag;
-                championName.textContent = name;
-                championFlagSmall.textContent = flag;
-
-                // Limpar fogos anteriores
-                fireworksContainer.innerHTML = '';
-
-                // Criar fogos de artifício (estrelas douradas)
-                createFireworks(fireworksContainer);
-
-                // Criar estrelas grandes
-                createBigStars(fireworksContainer);
-
-                // Criar confetes
-                createConfetti(fireworksContainer);
-
-                overlay.classList.add('active');
+                document.getElementById('championFlag').textContent = flag;
+                document.getElementById('championName').textContent = name;
+                document.getElementById('championFlagSmall').textContent = flag;
+                const fc = document.getElementById('fireworksContainer');
+                fc.innerHTML = '';
+                createFireworks(fc);
+                createBigStars(fc);
+                createConfetti(fc);
+                document.getElementById('championOverlay').classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
 
@@ -842,19 +854,12 @@
                     for (let i = 0; i < 30; i++) {
                         const star = document.createElement('div');
                         star.className = 'firework-star';
-                        if (burst % 3 === 0) star.classList.add('delayed');
-                        if (burst % 3 === 1) star.classList.add('delayed2');
-                        if (burst % 3 === 2) star.classList.add('delayed3');
                         const angle = (i / 30) * Math.PI * 2;
                         const distance = 80 + Math.random() * 150;
-                        const tx = Math.cos(angle) * distance * 0.5;
-                        const ty = Math.sin(angle) * distance * 0.5;
-                        const fx = Math.cos(angle) * distance;
-                        const fy = Math.sin(angle) * distance;
-                        star.style.setProperty('--tx', `${tx}px`);
-                        star.style.setProperty('--ty', `${ty}px`);
-                        star.style.setProperty('--fx', `${fx}px`);
-                        star.style.setProperty('--fy', `${fy}px`);
+                        star.style.setProperty('--tx', `${Math.cos(angle) * distance * 0.5}px`);
+                        star.style.setProperty('--ty', `${Math.sin(angle) * distance * 0.5}px`);
+                        star.style.setProperty('--fx', `${Math.cos(angle) * distance}px`);
+                        star.style.setProperty('--fy', `${Math.sin(angle) * distance}px`);
                         star.style.left = `${burstX}%`;
                         star.style.top = `${burstY}%`;
                         star.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -872,14 +877,10 @@
                     star.textContent = '⭐';
                     star.style.left = `${Math.random() * 90}%`;
                     star.style.top = `${Math.random() * 80}%`;
-                    const stx = (Math.random() - 0.5) * 200;
-                    const sty = (Math.random() - 0.5) * 200;
-                    const sfx = (Math.random() - 0.5) * 400;
-                    const sfy = (Math.random() - 0.5) * 400;
-                    star.style.setProperty('--stx', `${stx}px`);
-                    star.style.setProperty('--sty', `${sty}px`);
-                    star.style.setProperty('--sfx', `${sfx}px`);
-                    star.style.setProperty('--sfy', `${sfy}px`);
+                    star.style.setProperty('--stx', `${(Math.random() - 0.5) * 200}px`);
+                    star.style.setProperty('--sty', `${(Math.random() - 0.5) * 200}px`);
+                    star.style.setProperty('--sfx', `${(Math.random() - 0.5) * 400}px`);
+                    star.style.setProperty('--sfy', `${(Math.random() - 0.5) * 400}px`);
                     star.style.animationDelay = `${Math.random() * 2}s`;
                     star.style.fontSize = `${1.5 + Math.random() * 3}rem`;
                     container.appendChild(star);
@@ -887,10 +888,10 @@
             }
 
             function createConfetti(container) {
-                const confettiColors = ['confetti', 'green', 'blue', 'white'];
+                const colors = ['confetti', 'green', 'blue', 'white'];
                 for (let i = 0; i < 80; i++) {
                     const confetti = document.createElement('div');
-                    confetti.className = `confetti ${confettiColors[Math.floor(Math.random() * confettiColors.length)]}`;
+                    confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
                     confetti.style.left = `${Math.random() * 100}%`;
                     confetti.style.animationDelay = `${Math.random() * 3}s`;
                     confetti.style.animationDuration = `${2 + Math.random() * 3}s`;
@@ -902,16 +903,13 @@
             }
 
             function hideChampionAnimation() {
-                const overlay = document.getElementById('championOverlay');
-                overlay.classList.remove('active');
+                document.getElementById('championOverlay').classList.remove('active');
                 document.body.style.overflow = '';
                 document.getElementById('fireworksContainer').innerHTML = '';
             }
 
             document.getElementById('closeChampion').addEventListener('click', hideChampionAnimation);
-            document.getElementById('championOverlay').addEventListener('click', function(e) {
-                if (e.target === this) hideChampionAnimation();
-            });
+            document.getElementById('championOverlay').addEventListener('click', function(e) { if (e.target === this) hideChampionAnimation(); });
 
             // ============ RENDERIZAÇÃO ============
             const $ = id => document.getElementById(id);
@@ -933,10 +931,7 @@
                     const { sorted } = calcStandings(i);
                     const isB = g[0] === "Grupo C";
                     const order = (pc === 6 && sorted.length === 4) ? sorted : g.slice(1);
-                    return `<div class="group-card${isB ? ' brazil-group' : ''}" data-gi="${i}">
-                <div class="group-title">${g[0]}${isB ? ' 🇧🇷' : ''}</div>
-                <ul class="team-list">${order.map((t, idx) => { let cls = ''; if (pc === 6) { if (idx === 0) cls = 'pos-1'; else if (idx === 1) cls = 'pos-2'; else if (idx === 2) cls = 'pos-3'; } return `<li class="team-item">${cls ? `<span class="pos-badge ${cls}">${idx + 1}º</span>` : ''}<span>${t}</span></li>`; }).join('')}</ul>
-                <div class="games-count">${pc}/6 jogos</div></div>`;
+                    return `<div class="group-card${isB ? ' brazil-group' : ''}" data-gi="${i}"><div class="group-title">${g[0]}${isB ? ' 🇧🇷' : ''}</div><ul class="team-list">${order.map((t, idx) => { let cls = ''; if (pc === 6) { if (idx === 0) cls = 'pos-1'; else if (idx === 1) cls = 'pos-2'; else if (idx === 2) cls = 'pos-3'; } return `<li class="team-item">${cls ? `<span class="pos-badge ${cls}">${idx + 1}º</span>` : ''}<span>${t}</span></li>`; }).join('')}</ul><div class="games-count">${pc}/6 jogos</div></div>`;
                 }).join('');
                 document.querySelectorAll('.group-card').forEach(c => c.addEventListener('click', () => showGroupDetail(parseInt(c.dataset.gi))));
             }
@@ -961,17 +956,66 @@
 
             function groupScoreHandler() { const gi = parseInt(this.dataset.g), r = parseInt(this.dataset.r), m = parseInt(this.dataset.m); const row = this.closest('.match-row'); setGroupScore(gi, r, m, row.querySelector('.gs-home').value.trim(), row.querySelector('.gs-away').value.trim()); const sc = getGroupScore(gi, r, m); const badge = row.querySelector('.badge-status'); if (isComplete(sc)) { badge.textContent = '✓'; badge.className = 'badge-status badge-done'; } else { badge.textContent = 'Pendente'; badge.className = 'badge-status badge-pending'; } updateStandingsInDetail(gi); updateKnockoutTabs(); }
 
-            function updateStandingsInDetail(gi) { const { sorted, stats } = calcStandings(gi); const pc = countPlayed(gi); const ap = pc === 6; const tb = document.querySelector('table tbody'); if (!tb) return; if (pc === 0) { tb.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>'; return; } tb.innerHTML = sorted.map((t, idx) => { const s = stats[t]; let rc = ''; if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc = 'row-eliminated'; } return `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`; }).join(''); const titleEl = document.querySelector('.section-title'); if (titleEl) titleEl.textContent = `📊 Classificação (${pc}/6 jogos)`; renderGroups(); }
+            function updateStandingsInDetail(gi) { const { sorted, stats } = calcStandings(gi); const pc = countPlayed(gi); const ap = pc === 6; const tb = document.querySelector('table tbody'); if (!tb) return; if (pc === 0) { tb.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>'; return; } tb.innerHTML = sorted.map((t, idx) => { const s = stats[t]; let rc = ''; if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc = 'row-eliminated'; } return `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`; }).join(''); renderGroups(); }
 
             function renderAllMatches() { allMatchesContent.innerHTML = groupsData.map((g, gi) => { const pc = countPlayed(gi); let h = `<div class="detail-title" style="font-size:1.2rem;">${g[0]} (${pc}/6)</div>`; for (let r = 0; r < 3; r++) { h += `<div style="font-weight:700;color:#fedd00;margin-top:0.5rem;">Rodada ${r + 1}</div>`; for (let m = 0; m < 2; m++) { const det = matchDetails[`${gi}-${r}-${m}`]; const sc = getGroupScore(gi, r, m); const pl = isComplete(sc); h += `<div class="match-row"><div class="match-teams"><span>${det.home}</span> vs <span>${det.away}</span><span class="badge-status ${pl?'badge-done':'badge-pending'}">${pl?'✓':'Pendente'}</span></div><div class="score-group"><span class="score-sep">${pl?sc.home+' × '+sc.away:'- × -'}</span></div><div class="match-meta"><span class="badge badge-date">📅 ${det.date}</span><span class="badge badge-time">🕐 ${det.time}</span></div></div>`; } } return h; }).join(''); }
 
             function renderThirds() { const allT = []; for (let g = 0; g < 12; g++) { const { sorted, stats } = calcStandings(g); if (sorted.length >= 3 && countPlayed(g) === 6) allT.push({ team: sorted[2], group: groupsData[g][0], pts: stats[sorted[2]].pts, sg: stats[sorted[2]].sg, gp: stats[sorted[2]].gp, j: stats[sorted[2]].j }); } allT.sort((a, b) => b.pts - a.pts || b.sg - a.sg || b.gp - a.gp); let h = `<div class="detail-title">📊 Melhores 3ºs</div><table><thead><tr><th>Pos</th><th>Grupo</th><th>Seleção</th><th>P</th><th>J</th><th>SG</th><th>GP</th></tr></thead><tbody>`; allT.forEach((t, i) => { h += `<tr class="${i<8?'row-qualified':'row-eliminated'}"><td>${i+1}º</td><td>${t.group}</td><td>${t.team}</td><td><strong>${t.pts}</strong></td><td>${t.j}</td><td>${t.sg>0?'+'+t.sg:t.sg}</td><td>${t.gp}</td></tr>`; }); h += `</tbody></table>`; thirdsContent.innerHTML = h; }
 
-            function renderKoStage(round, matches, container, title) { if (!matches || !matches.length) { container.innerHTML = '<div class="info-msg">Preencha todos os grupos primeiro para gerar os confrontos.</div>'; return; } let h = `<div class="bracket-round"><h3>${title}</h3>`; matches.forEach((m, i) => { const sc = getKoScore(round, i); const pl = sc && isComplete(sc); const w = pl ? (sc.home > sc.away ? m.t1 : m.t2) : null; h += `<div class="bracket-match"><span class="bracket-team${w===m.t1?' winner':''}">${m.t1}</span><span class="score-sep">vs</span><span class="bracket-team${w===m.t2?' winner':''}">${m.t2}</span><div class="score-group"><input type="number" class="score-input ko-home" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="home"><span class="score-sep">×</span><input type="number" class="score-input ko-away" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="away"></div>${w?`<span style="color:#00ff55;font-weight:700;font-size:0.8rem;">🏆 ${w}</span>`:''}</div>`; }); h += `</div>`; container.innerHTML = h; container.querySelectorAll('.ko-home, .ko-away').forEach(inp => inp.addEventListener('input', koScoreHandler)); }
+            function renderKoStage(round, matches, container, title) {
+                if (!matches || !matches.length) { container.innerHTML = '<div class="info-msg">Preencha todos os grupos primeiro para gerar os confrontos.</div>'; return; }
+                let h = `<div class="bracket-round"><h3>${title}</h3>`;
+                matches.forEach((m, i) => {
+                    const sc = getKoScore(round, i);
+                    const pen = getPenScore(round, i);
+                    const pl = sc && isComplete(sc);
+                    const penPl = pen && isPenComplete(pen);
+                    const isDraw = pl && sc.home === sc.away;
+                    const w = getKoWinnerWithPenalties(round, i, m.t1, m.t2);
+                    h += `<div class="bracket-match">
+                <span class="bracket-team${w===m.t1?' winner':''}">${m.t1}</span>
+                <span class="score-sep">vs</span>
+                <span class="bracket-team${w===m.t2?' winner':''}">${m.t2}</span>
+                <div class="score-group">
+                  <input type="number" class="score-input ko-home" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="home">
+                  <span class="score-sep">×</span>
+                  <input type="number" class="score-input ko-away" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="away">
+                </div>`;
+                    if (isDraw) {
+                        h += `<div class="penalty-section">
+                  <span class="penalty-label">⚽ Pênaltis:</span>
+                  <input type="number" class="penalty-input pen-home" value="${penPl&&pen.home!==null?pen.home:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="home">
+                  <span class="score-sep">×</span>
+                  <input type="number" class="penalty-input pen-away" value="${penPl&&pen.away!==null?pen.away:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="away">
+                  ${w ? `<span class="penalty-winner">🏆 ${w} vence nos pênaltis</span>` : (penPl ? '<span style="color:#ffaa00;font-size:0.7rem;">Pênaltis empatados</span>' : '')}
+                </div>`;
+                    }
+                    if (w && !isDraw) h += `<span style="color:#00ff55;font-weight:700;font-size:0.8rem;">🏆 ${w}</span>`;
+                    h += `</div>`;
+                });
+                h += `</div>`;
+                container.innerHTML = h;
+                container.querySelectorAll('.ko-home, .ko-away').forEach(inp => inp.addEventListener('input', koScoreHandler));
+                container.querySelectorAll('.pen-home, .pen-away').forEach(inp => inp.addEventListener('input', penScoreHandler));
+            }
 
             function koScoreHandler() { const round = this.dataset.round, m = parseInt(this.dataset.m); const row = this.closest('.bracket-match'); setKoScore(round, m, row.querySelector('.ko-home').value.trim(), row.querySelector('.ko-away').value.trim()); updateAllKoStages(); }
 
-            function updateAllKoStages() { if (!allGroupsComplete()) return; const r32 = generateR32(); if (!r32.length) return; const { r16, qf, sf, fin, champ } = simulateBracket(r32); renderKoStage('r32', r32, r32Content, '32 avos de final'); renderKoStage('r16', r16, r16Content, 'Oitavas de final'); renderKoStage('qf', qf, qfContent, 'Quartas de final'); renderKoStage('sf', sf, sfContent, 'Semifinais'); let fh = `<div class="bracket-round"><h3>🏆 Final</h3><div class="bracket-match"><span class="bracket-team${champ===fin.t1?' winner':''}">${fin.t1}</span><span class="score-sep">vs</span><span class="bracket-team${champ===fin.t2?' winner':''}">${fin.t2}</span><div class="score-group"><input type="number" class="score-input ko-home" value="${getKoScore('final',0)?.home??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="home"><span class="score-sep">×</span><input type="number" class="score-input ko-away" value="${getKoScore('final',0)?.away??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="away"></div></div></div>`; if (champ) { fh += `<div class="champion-card" style="cursor:pointer;" onclick="window.showChampionAnimation('${champ}')">🏆 CAMPEÃO: ${champ} 🏆<br><small style="font-size:0.7rem;">Clique para ver a animação!</small></div>`; } finalContent.innerHTML = fh; finalContent.querySelectorAll('.ko-home, .ko-away').forEach(inp => inp.addEventListener('input', koScoreHandler)); }
+            function penScoreHandler() { const round = this.dataset.round, m = parseInt(this.dataset.m); const row = this.closest('.bracket-match'); setPenScore(round, m, row.querySelector('.pen-home').value.trim(), row.querySelector('.pen-away').value.trim()); updateAllKoStages(); }
+
+            function updateAllKoStages() { if (!allGroupsComplete()) return; const r32 = generateR32(); if (!r32.length) return; const { r16, qf, sf, fin, champ } = simulateBracket(r32); renderKoStage('r32', r32, r32Content, '32 avos de final'); renderKoStage('r16', r16, r16Content, 'Oitavas de final'); renderKoStage('qf', qf, qfContent, 'Quartas de final'); renderKoStage('sf', sf, sfContent, 'Semifinais'); let fh = `<div class="bracket-round"><h3>🏆 Final</h3><div class="bracket-match"><span class="bracket-team${champ===fin.t1?' winner':''}">${fin.t1}</span><span class="score-sep">vs</span><span class="bracket-team${champ===fin.t2?' winner':''}">${fin.t2}</span><div class="score-group"><input type="number" class="score-input ko-home" value="${getKoScore('final',0)?.home??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="home"><span class="score-sep">×</span><input type="number" class="score-input ko-away" value="${getKoScore('final',0)?.away??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="away"></div>`;
+                const fsc = getKoScore('final', 0);
+                if (fsc && isComplete(fsc) && fsc.home === fsc.away) {
+                    const fpen = getPenScore('final', 0);
+                    const fpenPl = fpen && isPenComplete(fpen);
+                    fh += `<div class="penalty-section"><span class="penalty-label">⚽ Pênaltis:</span><input type="number" class="penalty-input pen-home" value="${fpenPl&&fpen.home!==null?fpen.home:''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="home"><span class="score-sep">×</span><input type="number" class="penalty-input pen-away" value="${fpenPl&&fpen.away!==null?fpen.away:''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="away">${champ ? `<span class="penalty-winner">🏆 ${champ} vence nos pênaltis</span>` : ''}</div>`;
+                }
+                fh += `</div></div>`;
+                if (champ) { fh += `<div class="champion-card" style="cursor:pointer;" onclick="window.showChampionAnimation('${champ}')">🏆 CAMPEÃO: ${champ} 🏆<br><small style="font-size:0.7rem;">Clique para ver a animação!</small></div>`; }
+                finalContent.innerHTML = fh;
+                finalContent.querySelectorAll('.ko-home, .ko-away').forEach(inp => inp.addEventListener('input', koScoreHandler));
+                finalContent.querySelectorAll('.pen-home, .pen-away').forEach(inp => inp.addEventListener('input', penScoreHandler));
+            }
 
             window.showChampionAnimation = showChampionAnimation;
 
@@ -982,13 +1026,11 @@
 
             const body = document.body;
             const themeToggle = $('themeToggle');
-            const themeIcon = $('themeIcon');
-            const themeText = $('themeText');
-            function setTheme(m) { if (m === 'light') { body.classList.add('light-mode'); themeIcon.textContent = '☀️'; themeText.textContent = 'Claro'; localStorage.setItem('copa2026theme', 'light'); } else { body.classList.remove('light-mode'); themeIcon.textContent = '🌙'; themeText.textContent = 'Escuro'; localStorage.setItem('copa2026theme', 'dark'); } }
+            function setTheme(m) { if (m === 'light') { body.classList.add('light-mode'); $('themeIcon').textContent = '☀️'; $('themeText').textContent = 'Claro'; localStorage.setItem('copa2026theme', 'light'); } else { body.classList.remove('light-mode'); $('themeIcon').textContent = '🌙'; $('themeText').textContent = 'Escuro'; localStorage.setItem('copa2026theme', 'dark'); } }
             themeToggle.addEventListener('click', () => setTheme(body.classList.contains('light-mode') ? 'dark' : 'light'));
-            document.addEventListener('keydown', function(e) { if (e.target.classList.contains('score-input')) { const allowed = [8, 46, 9, 27, 13, 37, 38, 39, 40]; if (allowed.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) return; e.preventDefault(); } });
+            document.addEventListener('keydown', function(e) { if (e.target.classList.contains('score-input') || e.target.classList.contains('penalty-input')) { const allowed = [8, 46, 9, 27, 13, 37, 38, 39, 40]; if (allowed.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) return; e.preventDefault(); } });
 
-            function init() { renderGroups(); renderAllMatches(); renderThirds(); const saved = localStorage.getItem('copa2026theme'); setTheme(saved === 'light' ? 'light' : 'dark'); switchTab('groups'); updateKnockoutTabs(); }
+            function init() { renderGroups(); renderAllMatches(); renderThirds(); setTheme(localStorage.getItem('copa2026theme') === 'light' ? 'light' : 'dark'); switchTab('groups'); updateKnockoutTabs(); }
             window.addEventListener('DOMContentLoaded', init);
         })();
     </script>
