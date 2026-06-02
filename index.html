@@ -10,25 +10,13 @@
         body {
             background: linear-gradient(160deg, #009c3b 0%, #00a859 25%, #1e7a3e 50%, #fedd00 75%, #ffcb00 100%);
             background-attachment: fixed;
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 2rem 1.5rem;
-            margin: 0;
+            padding: 1.5rem;
             transition: background 0.5s ease;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(0,83,179,0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(254,221,0,0.1) 0%, transparent 50%);
-            pointer-events: none; z-index: 0;
         }
 
         body.light-mode {
@@ -36,239 +24,526 @@
             background-attachment: fixed;
         }
 
-        body.light-mode::before {
-            background: radial-gradient(circle at 30% 40%, rgba(0,83,179,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 60%, rgba(254,221,0,0.08) 0%, transparent 50%);
-        }
-
         .container {
             max-width: 1500px;
             width: 100%;
-            background: rgba(0,50,20,0.75);
+            background: rgba(0, 50, 20, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 3.5rem;
-            padding: 2rem 1.8rem;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
-            border: 2px solid rgba(254,221,0,0.4);
-            position: relative; z-index: 1;
-            transition: background 0.3s, box-shadow 0.3s;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(254, 221, 0, 0.4);
+            transition: all 0.3s;
         }
 
         body.light-mode .container {
-            background: rgba(255,255,255,0.8);
-            border: 2px solid rgba(0,156,59,0.4);
-            box-shadow: 0 30px 50px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 156, 59, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .header {
-            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-            margin-bottom: 1.2rem; gap: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid rgba(254,221,0,0.3);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            gap: 0.8rem;
         }
 
-        body.light-mode .header { border-bottom-color: rgba(0,156,59,0.3); }
-
-        .title-section { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .trophy-icon { font-size: 2.5rem; filter: drop-shadow(0 8px 15px rgba(254,221,0,0.6)); }
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
 
         h1 {
-            font-size: 2.2rem; font-weight: 800; letter-spacing: 2px;
-            background: linear-gradient(to right, #fedd00, #ffcb00, #fedd00);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3); text-transform: uppercase;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fedd00, #ffcb00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
         }
 
-        body.light-mode h1 { background: linear-gradient(135deg, #009c3b, #006622); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body.light-mode h1 {
+            background: linear-gradient(135deg, #009c3b, #006622);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        .brazil-highlight {
-            display: inline-block; background: linear-gradient(135deg, #009c3b, #fedd00);
-            color: #005320; padding: 0.3rem 1rem; border-radius: 2rem;
-            font-weight: 800; font-size: 0.8rem; letter-spacing: 1px;
-            animation: pulse 2s infinite; border: 2px solid #fedd00;
+        .brazil-badge {
+            background: linear-gradient(135deg, #009c3b, #fedd00);
+            color: #005320;
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 0.8rem;
+            border: 2px solid #fedd00;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%,100% { box-shadow: 0 0 10px rgba(254,221,0,0.5); }
-            50% { box-shadow: 0 0 25px rgba(254,221,0,0.8); }
+            0%, 100% { box-shadow: 0 0 10px rgba(254, 221, 0, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(254, 221, 0, 0.7); }
         }
 
-        .theme-toggle {
-            background: rgba(0,83,179,0.2); border: 2px solid rgba(254,221,0,0.7);
-            color: #fedd00; padding: 0.6rem 1.2rem; border-radius: 3rem;
-            font-weight: 700; font-size: 0.9rem; cursor: pointer; backdrop-filter: blur(10px);
-            display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s;
+        .theme-btn {
+            background: rgba(0, 83, 179, 0.3);
+            border: 2px solid rgba(254, 221, 0, 0.6);
+            color: #fedd00;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .theme-toggle:hover { background: rgba(254,221,0,0.25); color: #fff; transform: scale(1.05); }
+        .theme-btn:hover {
+            background: rgba(254, 221, 0, 0.3);
+            color: #fff;
+        }
 
-        body.light-mode .theme-toggle { background: rgba(0,156,59,0.15); border-color: #009c3b; color: #006622; }
+        body.light-mode .theme-btn {
+            background: rgba(0, 156, 59, 0.2);
+            border-color: #009c3b;
+            color: #006622;
+        }
 
         .nav-tabs {
-            display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem;
-            border-bottom: 2px solid rgba(254,221,0,0.25); padding-bottom: 0.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid rgba(254, 221, 0, 0.3);
+            padding-bottom: 0.6rem;
+        }
+
+        body.light-mode .nav-tabs {
+            border-bottom-color: rgba(0, 156, 59, 0.3);
         }
 
         .tab-btn {
-            background: rgba(0,83,179,0.15); border: 1px solid rgba(254,221,0,0.3);
-            padding: 0.5rem 1rem; border-radius: 2rem; font-weight: 700; font-size: 0.8rem;
-            color: #fedd00; cursor: pointer; transition: 0.3s; backdrop-filter: blur(6px);
+            background: rgba(0, 83, 179, 0.2);
+            border: 1px solid rgba(254, 221, 0, 0.3);
+            padding: 0.5rem 0.9rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.78rem;
+            color: #fedd00;
+            cursor: pointer;
+            transition: all 0.3s;
             white-space: nowrap;
         }
 
-        body.light-mode .tab-btn { color: #006622; background: rgba(0,156,59,0.08); border-color: rgba(0,156,59,0.3); }
-
-        .tab-btn.active {
-            background: #fedd00; color: #005320; font-weight: 800;
-            border: 2px solid #005320; box-shadow: 0 8px 25px rgba(254,221,0,0.5);
+        body.light-mode .tab-btn {
+            color: #006622;
+            background: rgba(0, 156, 59, 0.1);
+            border-color: rgba(0, 156, 59, 0.3);
         }
 
-        body.light-mode .tab-btn.active { background: #009c3b; color: #fff; border-color: #fedd00; }
+        .tab-btn.active {
+            background: #fedd00;
+            color: #005320;
+            border: 2px solid #005320;
+            box-shadow: 0 5px 20px rgba(254, 221, 0, 0.5);
+        }
 
-        .tab-btn.locked { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+        body.light-mode .tab-btn.active {
+            background: #009c3b;
+            color: #fff;
+            border-color: #fedd00;
+        }
 
-        .panel { display: none; animation: fadeSlide 0.4s ease; }
-        .panel.active { display: block; }
+        .tab-btn.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
 
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(15px); }
+        .tab-btn.locked:hover {
+            background: rgba(0, 83, 179, 0.2);
+            color: #fedd00;
+        }
+
+        .panel {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .groups-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem; margin-top: 0.8rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
         }
 
         .group-card {
-            background: linear-gradient(135deg, rgba(0,83,179,0.25), rgba(0,50,20,0.8));
-            backdrop-filter: blur(14px); border-radius: 1.8rem; padding: 1rem 0.7rem;
-            border: 2px solid rgba(254,221,0,0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: all 0.3s; cursor: pointer;
+            background: linear-gradient(135deg, rgba(0, 83, 179, 0.3), rgba(0, 50, 20, 0.85));
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1rem 0.7rem;
+            border: 2px solid rgba(254, 221, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .group-card.brazil-group { border: 3px solid #fedd00; animation: pulse 2s infinite; }
+        .group-card:hover {
+            transform: translateY(-3px);
+            border-color: #fedd00;
+        }
 
-        body.light-mode .group-card { background: rgba(255,255,255,0.9); border-color: rgba(0,156,59,0.3); }
-        body.light-mode .group-card.brazil-group { border-color: #009c3b; }
+        .group-card.brazil-group {
+            border: 3px solid #fedd00;
+            animation: pulse 2s infinite;
+        }
 
-        .group-card:hover { transform: translateY(-4px); border-color: #fedd00; }
+        body.light-mode .group-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 156, 59, 0.3);
+        }
 
         .group-title {
-            font-weight: 800; font-size: 1.1rem; text-align: center; margin-bottom: 0.8rem;
-            color: #fedd00; letter-spacing: 1px; text-transform: uppercase;
-            border-bottom: 2px solid rgba(254,221,0,0.3); padding-bottom: 0.4rem;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #fedd00;
+            border-bottom: 1px solid rgba(254, 221, 0, 0.3);
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.6rem;
         }
 
-        body.light-mode .group-title { color: #006622; border-bottom-color: rgba(0,156,59,0.3); }
+        body.light-mode .group-title {
+            color: #006622;
+            border-bottom-color: rgba(0, 156, 59, 0.3);
+        }
 
-        .team-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+        .team-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
         .team-item {
-            display: flex; align-items: center; gap: 0.4rem;
-            background: rgba(0,83,179,0.2); border-radius: 2rem; padding: 0.4rem 0.6rem;
-            font-weight: 600; color: #fff; font-size: 0.8rem;
-            border: 1px solid rgba(254,221,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 83, 179, 0.25);
+            border-radius: 2rem;
+            padding: 0.35rem 0.6rem;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.8rem;
         }
 
-        .team-item .position-badge {
-            font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 1rem;
-            font-weight: 800; min-width: 20px; text-align: center;
+        body.light-mode .team-item {
+            background: rgba(0, 156, 59, 0.1);
+            color: #1a3a1a;
         }
 
-        .pos-1st { background: #00ff55; color: #003d10; }
-        .pos-2nd { background: #00cc44; color: #003d10; }
-        .pos-3rd { background: rgba(254,221,0,0.4); color: #fedd00; }
+        .team-item .pos-badge {
+            font-size: 0.6rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 1rem;
+            font-weight: 800;
+            min-width: 18px;
+            text-align: center;
+        }
 
-        .team-item.brazil-team { background: rgba(254,221,0,0.25); border: 2px solid #fedd00; color: #fedd00; }
-        body.light-mode .team-item { background: rgba(0,156,59,0.08); color: #1a3a1a; }
-        body.light-mode .team-item.brazil-team { background: rgba(0,156,59,0.2); border-color: #009c3b; color: #006622; }
+        .pos-1 { background: #00ff55; color: #003d10; }
+        .pos-2 { background: #00cc44; color: #003d10; }
+        .pos-3 { background: rgba(254, 221, 0, 0.5); color: #fedd00; }
 
-        .games-count { text-align: center; margin-top: 0.5rem; font-size: 0.7rem; color: #fedd00; background: rgba(0,0,0,0.3); padding: 0.15rem 0.6rem; border-radius: 1rem; }
+        .games-count {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #fedd00;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.15rem 0.6rem;
+            border-radius: 1rem;
+        }
 
-        .detail-container { margin-top: 1rem; }
+        .detail-container {
+            margin-top: 1rem;
+        }
+
         .back-btn {
-            background: rgba(0,83,179,0.3); border: 2px solid rgba(254,221,0,0.5);
-            color: #fedd00; padding: 0.5rem 1.2rem; border-radius: 2rem;
-            cursor: pointer; font-weight: 700; margin-bottom: 1rem; transition: all 0.3s;
-        }
-        .back-btn:hover { background: rgba(254,221,0,0.2); transform: translateX(-3px); }
-
-        .group-detail-title { font-size: 1.8rem; font-weight: 800; color: #fedd00; text-align: center; margin-bottom: 1rem; }
-        .section-title { font-size: 1.2rem; font-weight: 700; color: #fedd00; margin: 1.2rem 0 0.6rem 0; padding-left: 0.8rem; border-left: 5px solid #fedd00; }
-
-        .standings-table {
-            width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;
-            background: rgba(0,50,20,0.7); backdrop-filter: blur(12px);
-            border-radius: 1.5rem; overflow: hidden; border: 2px solid rgba(254,221,0,0.3);
+            background: rgba(0, 83, 179, 0.4);
+            border: 2px solid rgba(254, 221, 0, 0.6);
+            color: #fedd00;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
         }
 
-        .standings-table th, .standings-table td { padding: 0.6rem 0.4rem; text-align: center; color: #fff; font-size: 0.8rem; border-bottom: 1px solid rgba(254,221,0,0.2); }
-        .standings-table th { background: rgba(254,221,0,0.2); font-weight: 800; color: #fedd00; text-transform: uppercase; }
-        .standings-table .team-cell { text-align: left; padding-left: 0.8rem; font-weight: 700; }
-
-        .qualified-row { background: rgba(0,255,100,0.2); border-left: 4px solid #00ff55; }
-        .qualified-row td { color: #00ff55; font-weight: 700; }
-        .third-row { background: rgba(254,221,0,0.12); border-left: 4px solid #fedd00; }
-        .third-row td { color: #fedd00; }
-        .eliminated-row { opacity: 0.4; }
-
-        .match-edit-row {
-            background: rgba(0,50,20,0.75); backdrop-filter: blur(12px);
-            border-radius: 1.5rem; padding: 0.7rem 1rem; margin-bottom: 0.6rem;
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: wrap; gap: 0.6rem; border: 2px solid rgba(254,221,0,0.2);
-            color: #fff; transition: all 0.3s;
+        .back-btn:hover {
+            background: rgba(254, 221, 0, 0.3);
         }
 
-        .match-teams-display { display: flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.95rem; min-width: 200px; }
-        .score-input-group { display: flex; align-items: center; gap: 0.4rem; background: rgba(0,0,0,0.3); padding: 0.2rem 0.6rem; border-radius: 2rem; }
-        .score-input { width: 45px; padding: 0.3rem; text-align: center; background: rgba(255,255,255,0.15); border: 2px solid rgba(254,221,0,0.5); border-radius: 0.8rem; color: #fedd00; font-weight: 800; font-size: 1rem; }
-        .score-input:focus { outline: none; border-color: #fedd00; box-shadow: 0 0 15px rgba(254,221,0,0.5); }
-        .score-separator { font-weight: 800; font-size: 1.1rem; color: #fedd00; }
-        .match-info-group { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-        .match-date { background: rgba(0,83,179,0.4); padding: 0.2rem 0.6rem; border-radius: 1rem; font-weight: 700; font-size: 0.8rem; color: #fedd00; }
-        .match-time { background: rgba(254,221,0,0.3); padding: 0.2rem 0.6rem; border-radius: 1rem; font-weight: 700; font-size: 0.8rem; color: #fff; }
-        .match-status { font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 1rem; font-weight: 700; }
-        .status-pending { background: rgba(255,255,255,0.1); color: #aaa; }
-        .status-played { background: rgba(0,255,100,0.3); color: #00ff55; border: 1px solid #00ff55; }
+        .detail-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fedd00;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
 
-        .round-header { font-weight: 700; color: #fedd00; margin-top: 0.8rem; margin-bottom: 0.4rem; font-size: 0.9rem; background: rgba(0,83,179,0.3); padding: 0.3rem 0.8rem; border-radius: 2rem; display: inline-block; }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fedd00;
+            margin: 1rem 0 0.5rem 0;
+            padding-left: 0.8rem;
+            border-left: 4px solid #fedd00;
+        }
 
-        .bracket-container { display: flex; flex-direction: column; gap: 1.5rem; }
-        .bracket-round { background: rgba(0,50,20,0.7); backdrop-filter: blur(12px); border-radius: 2rem; padding: 1.2rem; border: 2px solid rgba(254,221,0,0.3); }
-        .bracket-round h3 { color: #fedd00; text-align: center; margin-bottom: 1rem; font-size: 1.2rem; }
-        .bracket-matches { display: flex; flex-direction: column; gap: 0.6rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 50, 20, 0.7);
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 2px solid rgba(254, 221, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.5rem 0.3rem;
+            text-align: center;
+            color: #fff;
+            font-size: 0.75rem;
+            border-bottom: 1px solid rgba(254, 221, 0, 0.15);
+        }
+
+        th {
+            background: rgba(254, 221, 0, 0.2);
+            font-weight: 800;
+            color: #fedd00;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+        }
+
+        .team-cell {
+            text-align: left;
+            padding-left: 0.6rem;
+            font-weight: 700;
+        }
+
+        .row-qualified {
+            background: rgba(0, 255, 100, 0.2);
+            border-left: 3px solid #00ff55;
+        }
+        .row-qualified td {
+            color: #00ff55;
+            font-weight: 700;
+        }
+
+        .row-third {
+            background: rgba(254, 221, 0, 0.12);
+            border-left: 3px solid #fedd00;
+        }
+        .row-third td {
+            color: #fedd00;
+        }
+
+        .row-eliminated {
+            opacity: 0.4;
+        }
+
+        .match-row {
+            background: rgba(0, 50, 20, 0.7);
+            border-radius: 1.2rem;
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border: 1px solid rgba(254, 221, 0, 0.2);
+            color: #fff;
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+
+        .score-group {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 1.5rem;
+        }
+
+        .score-input {
+            width: 40px;
+            padding: 0.25rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(254, 221, 0, 0.5);
+            border-radius: 0.6rem;
+            color: #fedd00;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .score-input:focus {
+            outline: none;
+            border-color: #fedd00;
+            box-shadow: 0 0 10px rgba(254, 221, 0, 0.5);
+        }
+
+        .score-sep {
+            font-weight: 800;
+            color: #fedd00;
+        }
+
+        .match-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+        }
+
+        .badge {
+            padding: 0.15rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 0.7rem;
+        }
+
+        .badge-date {
+            background: rgba(0, 83, 179, 0.5);
+            color: #fedd00;
+        }
+
+        .badge-time {
+            background: rgba(254, 221, 0, 0.3);
+            color: #fff;
+        }
+
+        .badge-status {
+            font-size: 0.65rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 700;
+        }
+
+        .badge-pending {
+            background: rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        .badge-done {
+            background: rgba(0, 255, 100, 0.3);
+            color: #00ff55;
+        }
+
+        .bracket-round {
+            background: rgba(0, 50, 20, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid rgba(254, 221, 0, 0.3);
+        }
+
+        .bracket-round h3 {
+            color: #fedd00;
+            text-align: center;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
         .bracket-match {
-            background: rgba(0,83,179,0.2); border-radius: 1.5rem; padding: 0.7rem 1rem;
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: wrap; gap: 0.5rem; border: 1px solid rgba(254,221,0,0.2);
+            background: rgba(0, 83, 179, 0.2);
+            border-radius: 1rem;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border: 1px solid rgba(254, 221, 0, 0.15);
         }
-        .bracket-team { font-weight: 700; font-size: 0.9rem; min-width: 150px; }
-        .bracket-team.winner { color: #00ff55; }
-        .bracket-score { background: #fedd00; color: #005320; padding: 0.2rem 0.6rem; border-radius: 1rem; font-weight: 800; font-size: 0.9rem; }
-        .bracket-vs { color: #fedd00; font-weight: 800; }
 
-        .footer-note { margin-top: 1.5rem; text-align: center; font-size: 0.8rem; color: #fedd00; background: rgba(0,0,0,0.3); padding: 0.4rem 1rem; border-radius: 2rem; }
+        .bracket-team {
+            font-weight: 700;
+            font-size: 0.85rem;
+            min-width: 130px;
+        }
 
-        .classification-legend { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin: 0.8rem 0; font-size: 0.75rem; color: #fedd00; }
-        .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-        .legend-dot.qualified { background: #00ff55; }
-        .legend-dot.third { background: #fedd00; }
-        .legend-dot.eliminated { background: #666; }
+        .bracket-team.winner {
+            color: #00ff55;
+        }
 
         .champion-card {
-            background: linear-gradient(135deg, #fedd00, #ffcb00); color: #005320;
-            text-align: center; padding: 1.5rem; border-radius: 2rem; font-weight: 800;
-            font-size: 1.5rem; border: 3px solid #005320; box-shadow: 0 0 30px rgba(254,221,0,0.6);
+            background: linear-gradient(135deg, #fedd00, #ffcb00);
+            color: #005320;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+            border: 3px solid #005320;
+            box-shadow: 0 0 40px rgba(254, 221, 0, 0.6);
             animation: pulse 1.5s infinite;
+            margin-top: 1rem;
+        }
+
+        .footer-note {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #fedd00;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+        }
+
+        body.light-mode .footer-note {
+            color: #006622;
+            background: rgba(0, 156, 59, 0.1);
+        }
+
+        .info-msg {
+            text-align: center;
+            color: #fedd00;
+            padding: 2rem;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 1.5rem;
         }
 
         @media (max-width: 700px) {
-            .container { padding: 1.2rem 0.8rem; }
-            .match-edit-row { flex-direction: column; align-items: flex-start; }
-            h1 { font-size: 1.6rem; }
-            .tab-btn { font-size: 0.7rem; padding: 0.4rem 0.7rem; }
+            .container { padding: 1rem 0.7rem; }
+            .match-row { flex-direction: column; align-items: flex-start; }
+            h1 { font-size: 1.4rem; }
+            .tab-btn { font-size: 0.7rem; padding: 0.4rem 0.6rem; }
         }
     </style>
 </head>
@@ -276,437 +551,517 @@
     <div class="container">
         <div class="header">
             <div class="title-section">
-                <span class="trophy-icon">🏆</span>
+                <span style="font-size:2rem;">🏆</span>
                 <h1>Copa 2026</h1>
-                <span class="brazil-highlight">🇧🇷 Grupo C</span>
+                <span class="brazil-badge">🇧🇷 Brasil Grupo C</span>
             </div>
-            <button id="themeToggle" class="theme-toggle">
+            <button id="themeToggle" class="theme-btn">
                 <span id="themeIcon">🌙</span> <span id="themeText">Escuro</span>
             </button>
         </div>
 
         <div class="nav-tabs" id="navTabs">
             <button class="tab-btn active" data-tab="groups">🌍 Grupos</button>
-            <button class="tab-btn" data-tab="all-matches">⚽ Jogos</button>
-            <button class="tab-btn" data-tab="third-places">📊 3ºs</button>
-            <button class="tab-btn locked" data-tab="round32" id="tabRound32">32 avos</button>
-            <button class="tab-btn locked" data-tab="round16" id="tabRound16">Oitavas</button>
-            <button class="tab-btn locked" data-tab="quarters" id="tabQuarters">Quartas</button>
-            <button class="tab-btn locked" data-tab="semis" id="tabSemis">Semi</button>
+            <button class="tab-btn" data-tab="matches">⚽ Jogos</button>
+            <button class="tab-btn" data-tab="thirds">📊 3ºs</button>
+            <button class="tab-btn locked" data-tab="r32" id="tabR32">32 avos</button>
+            <button class="tab-btn locked" data-tab="r16" id="tabR16">Oitavas</button>
+            <button class="tab-btn locked" data-tab="qf" id="tabQF">Quartas</button>
+            <button class="tab-btn locked" data-tab="sf" id="tabSF">Semi</button>
             <button class="tab-btn locked" data-tab="final" id="tabFinal">🏆 Final</button>
         </div>
 
-        <div id="groupsPanel" class="panel active">
-            <div class="groups-grid" id="groupsContainer"></div>
-            <div id="groupDetailContainer" class="detail-container" style="display:none;"></div>
+        <!-- Painéis -->
+        <div id="panelGroups" class="panel active">
+            <div class="groups-grid" id="groupsGrid"></div>
+            <div id="groupDetail" style="display:none;"></div>
         </div>
+        <div id="panelMatches" class="panel"><div id="allMatchesContent"></div></div>
+        <div id="panelThirds" class="panel"><div id="thirdsContent"></div></div>
+        <div id="panelR32" class="panel"><div id="r32Content"></div></div>
+        <div id="panelR16" class="panel"><div id="r16Content"></div></div>
+        <div id="panelQF" class="panel"><div id="qfContent"></div></div>
+        <div id="panelSF" class="panel"><div id="sfContent"></div></div>
+        <div id="panelFinal" class="panel"><div id="finalContent"></div></div>
 
-        <div id="allMatchesPanel" class="panel"><div id="allMatchesContainer"></div></div>
-        <div id="thirdPlacesPanel" class="panel"><div id="thirdPlacesContainer"></div></div>
-        <div id="round32Panel" class="panel"><div id="round32Container"></div></div>
-        <div id="round16Panel" class="panel"><div id="round16Container"></div></div>
-        <div id="quartersPanel" class="panel"><div id="quartersContainer"></div></div>
-        <div id="semisPanel" class="panel"><div id="semisContainer"></div></div>
-        <div id="finalPanel" class="panel"><div id="finalContainer"></div></div>
-
-        <div class="footer-note">🇧🇷 Copa 2026 • 48 seleções • 12 grupos • 32 classificados • 8 jogos até o título</div>
+        <div class="footer-note">🇧🇷 Copa 2026 • 48 seleções • 12 grupos • 32 classificados • 8 jogos → 🏆</div>
     </div>
 
     <script>
         (function() {
+            // ============ DADOS ============
             const groupsData = [
-                { name: "Grupo A", teams: ["🇲🇽 México", "🇿🇦 África do Sul", "🇰🇷 Coreia do Sul", "🇨🇿 República Tcheca"] },
-                { name: "Grupo B", teams: ["🇨🇦 Canadá", "🇧🇦 Bósnia e Herzegovina", "🇶🇦 Catar", "🇨🇭 Suíça"] },
-                { name: "Grupo C", teams: ["🇧🇷 Brasil", "🇲🇦 Marrocos", "🇭🇹 Haiti", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"] },
-                { name: "Grupo D", teams: ["🇺🇸 Estados Unidos", "🇵🇾 Paraguai", "🇦🇺 Austrália", "🇹🇷 Turquia"] },
-                { name: "Grupo E", teams: ["🇩🇪 Alemanha", "🇨🇼 Curaçao", "🇨🇮 Costa do Marfim", "🇪🇨 Equador"] },
-                { name: "Grupo F", teams: ["🇳🇱 Holanda", "🇯🇵 Japão", "🇸🇪 Suécia", "🇹🇳 Tunísia"] },
-                { name: "Grupo G", teams: ["🇧🇪 Bélgica", "🇪🇬 Egito", "🇮🇷 Irã", "🇳🇿 Nova Zelândia"] },
-                { name: "Grupo H", teams: ["🇪🇸 Espanha", "🇨🇻 Cabo Verde", "🇸🇦 Arábia Saudita", "🇺🇾 Uruguai"] },
-                { name: "Grupo I", teams: ["🇫🇷 França", "🇸🇳 Senegal", "🇮🇶 Iraque", "🇳🇴 Noruega"] },
-                { name: "Grupo J", teams: ["🇦🇷 Argentina", "🇩🇿 Argélia", "🇦🇹 Áustria", "🇯🇴 Jordânia"] },
-                { name: "Grupo K", teams: ["🇵🇹 Portugal", "🇨🇩 RD Congo", "🇺🇿 Uzbequistão", "🇨🇴 Colômbia"] },
-                { name: "Grupo L", teams: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croácia", "🇬🇭 Gana", "🇵🇦 Panamá"] }
+                ["Grupo A", "🇲🇽 México", "🇿🇦 África do Sul", "🇰🇷 Coreia do Sul", "🇨🇿 República Tcheca"],
+                ["Grupo B", "🇨🇦 Canadá", "🇧🇦 Bósnia e Herzegovina", "🇶🇦 Catar", "🇨🇭 Suíça"],
+                ["Grupo C", "🇧🇷 Brasil", "🇲🇦 Marrocos", "🇭🇹 Haiti", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],
+                ["Grupo D", "🇺🇸 Estados Unidos", "🇵🇾 Paraguai", "🇦🇺 Austrália", "🇹🇷 Turquia"],
+                ["Grupo E", "🇩🇪 Alemanha", "🇨🇼 Curaçao", "🇨🇮 Costa do Marfim", "🇪🇨 Equador"],
+                ["Grupo F", "🇳🇱 Holanda", "🇯🇵 Japão", "🇸🇪 Suécia", "🇹🇳 Tunísia"],
+                ["Grupo G", "🇧🇪 Bélgica", "🇪🇬 Egito", "🇮🇷 Irã", "🇳🇿 Nova Zelândia"],
+                ["Grupo H", "🇪🇸 Espanha", "🇨🇻 Cabo Verde", "🇸🇦 Arábia Saudita", "🇺🇾 Uruguai"],
+                ["Grupo I", "🇫🇷 França", "🇸🇳 Senegal", "🇮🇶 Iraque", "🇳🇴 Noruega"],
+                ["Grupo J", "🇦🇷 Argentina", "🇩🇿 Argélia", "🇦🇹 Áustria", "🇯🇴 Jordânia"],
+                ["Grupo K", "🇵🇹 Portugal", "🇨🇩 RD Congo", "🇺🇿 Uzbequistão", "🇨🇴 Colômbia"],
+                ["Grupo L", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croácia", "🇬🇭 Gana", "🇵🇦 Panamá"]
             ];
 
-            const officialMatches = {};
-            const matchData = [
-                ["11/06","16h","🇲🇽 México","🇿🇦 África do Sul"],["11/06","23h","🇰🇷 Coreia do Sul","🇨🇿 República Tcheca"],["18/06","13h","🇨🇿 República Tcheca","🇿🇦 África do Sul"],["18/06","22h","🇲🇽 México","🇰🇷 Coreia do Sul"],["24/06","22h","🇨🇿 República Tcheca","🇲🇽 México"],["24/06","22h","🇿🇦 África do Sul","🇰🇷 Coreia do Sul"],
-                ["12/06","16h","🇨🇦 Canadá","🇧🇦 Bósnia e Herzegovina"],["13/06","16h","🇶🇦 Catar","🇨🇭 Suíça"],["18/06","16h","🇨🇭 Suíça","🇧🇦 Bósnia e Herzegovina"],["18/06","19h","🇨🇦 Canadá","🇶🇦 Catar"],["24/06","16h","🇨🇭 Suíça","🇨🇦 Canadá"],["24/06","16h","🇧🇦 Bósnia e Herzegovina","🇶🇦 Catar"],
-                ["13/06","19h","🇧🇷 Brasil","🇲🇦 Marrocos"],["13/06","22h","🇭🇹 Haiti","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],["19/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇲🇦 Marrocos"],["19/06","22h","🇧🇷 Brasil","🇭🇹 Haiti"],["24/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇧🇷 Brasil"],["24/06","19h","🇲🇦 Marrocos","🇭🇹 Haiti"],
-                ["12/06","22h","🇺🇸 Estados Unidos","🇵🇾 Paraguai"],["13/06","19h","🇦🇺 Austrália","🇹🇷 Turquia"],["19/06","16h","🇵🇾 Paraguai","🇦🇺 Austrália"],["19/06","22h","🇺🇸 Estados Unidos","🇹🇷 Turquia"],["25/06","19h","🇵🇾 Paraguai","🇺🇸 Estados Unidos"],["25/06","19h","🇹🇷 Turquia","🇦🇺 Austrália"],
-                ["14/06","13h","🇩🇪 Alemanha","🇨🇼 Curaçao"],["14/06","19h","🇨🇮 Costa do Marfim","🇪🇨 Equador"],["20/06","16h","🇪🇨 Equador","🇩🇪 Alemanha"],["20/06","22h","🇨🇼 Curaçao","🇨🇮 Costa do Marfim"],["26/06","16h","🇩🇪 Alemanha","🇨🇮 Costa do Marfim"],["26/06","16h","🇪🇨 Equador","🇨🇼 Curaçao"],
-                ["14/06","16h","🇳🇱 Holanda","🇯🇵 Japão"],["14/06","22h","🇸🇪 Suécia","🇹🇳 Tunísia"],["20/06","19h","🇯🇵 Japão","🇸🇪 Suécia"],["20/06","22h","🇳🇱 Holanda","🇹🇳 Tunísia"],["26/06","19h","🇯🇵 Japão","🇹🇳 Tunísia"],["26/06","19h","🇳🇱 Holanda","🇸🇪 Suécia"],
-                ["15/06","13h","🇧🇪 Bélgica","🇪🇬 Egito"],["15/06","19h","🇮🇷 Irã","🇳🇿 Nova Zelândia"],["21/06","16h","🇪🇬 Egito","🇮🇷 Irã"],["21/06","22h","🇧🇪 Bélgica","🇳🇿 Nova Zelândia"],["27/06","16h","🇧🇪 Bélgica","🇮🇷 Irã"],["27/06","16h","🇪🇬 Egito","🇳🇿 Nova Zelândia"],
-                ["15/06","16h","🇪🇸 Espanha","🇨🇻 Cabo Verde"],["15/06","22h","🇸🇦 Arábia Saudita","🇺🇾 Uruguai"],["21/06","19h","🇨🇻 Cabo Verde","🇸🇦 Arábia Saudita"],["21/06","22h","🇪🇸 Espanha","🇺🇾 Uruguai"],["27/06","19h","🇪🇸 Espanha","🇸🇦 Arábia Saudita"],["27/06","19h","🇨🇻 Cabo Verde","🇺🇾 Uruguai"],
-                ["16/06","13h","🇫🇷 França","🇸🇳 Senegal"],["16/06","19h","🇮🇶 Iraque","🇳🇴 Noruega"],["22/06","16h","🇸🇳 Senegal","🇮🇶 Iraque"],["22/06","22h","🇫🇷 França","🇳🇴 Noruega"],["27/06","22h","🇫🇷 França","🇮🇶 Iraque"],["27/06","22h","🇸🇳 Senegal","🇳🇴 Noruega"],
-                ["16/06","16h","🇦🇷 Argentina","🇩🇿 Argélia"],["16/06","22h","🇦🇹 Áustria","🇯🇴 Jordânia"],["22/06","19h","🇩🇿 Argélia","🇦🇹 Áustria"],["22/06","22h","🇦🇷 Argentina","🇯🇴 Jordânia"],["27/06","13h","🇦🇷 Argentina","🇦🇹 Áustria"],["27/06","13h","🇩🇿 Argélia","🇯🇴 Jordânia"],
-                ["17/06","13h","🇵🇹 Portugal","🇨🇩 RD Congo"],["17/06","19h","🇺🇿 Uzbequistão","🇨🇴 Colômbia"],["23/06","16h","🇨🇩 RD Congo","🇺🇿 Uzbequistão"],["23/06","22h","🇵🇹 Portugal","🇨🇴 Colômbia"],["27/06","16h","🇵🇹 Portugal","🇺🇿 Uzbequistão"],["27/06","16h","🇨🇩 RD Congo","🇨🇴 Colômbia"],
-                ["17/06","16h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇭🇷 Croácia"],["17/06","22h","🇬🇭 Gana","🇵🇦 Panamá"],["23/06","19h","🇭🇷 Croácia","🇬🇭 Gana"],["23/06","22h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇵🇦 Panamá"],["27/06","19h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇬🇭 Gana"],["27/06","19h","🇭🇷 Croácia","🇵🇦 Panamá"]
+            // Dados oficiais: [data, hora, time_casa, time_visitante]
+            const rawMatches = [
+                ["11/06","16h","🇲🇽 México","🇿🇦 África do Sul"],["11/06","23h","🇰🇷 Coreia do Sul","🇨🇿 República Tcheca"],
+                ["18/06","13h","🇨🇿 República Tcheca","🇿🇦 África do Sul"],["18/06","22h","🇲🇽 México","🇰🇷 Coreia do Sul"],
+                ["24/06","22h","🇨🇿 República Tcheca","🇲🇽 México"],["24/06","22h","🇿🇦 África do Sul","🇰🇷 Coreia do Sul"],
+                ["12/06","16h","🇨🇦 Canadá","🇧🇦 Bósnia e Herzegovina"],["13/06","16h","🇶🇦 Catar","🇨🇭 Suíça"],
+                ["18/06","16h","🇨🇭 Suíça","🇧🇦 Bósnia e Herzegovina"],["18/06","19h","🇨🇦 Canadá","🇶🇦 Catar"],
+                ["24/06","16h","🇨🇭 Suíça","🇨🇦 Canadá"],["24/06","16h","🇧🇦 Bósnia e Herzegovina","🇶🇦 Catar"],
+                ["13/06","19h","🇧🇷 Brasil","🇲🇦 Marrocos"],["13/06","22h","🇭🇹 Haiti","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],
+                ["19/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇲🇦 Marrocos"],["19/06","22h","🇧🇷 Brasil","🇭🇹 Haiti"],
+                ["24/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇧🇷 Brasil"],["24/06","19h","🇲🇦 Marrocos","🇭🇹 Haiti"],
+                ["12/06","22h","🇺🇸 Estados Unidos","🇵🇾 Paraguai"],["13/06","19h","🇦🇺 Austrália","🇹🇷 Turquia"],
+                ["19/06","16h","🇵🇾 Paraguai","🇦🇺 Austrália"],["19/06","22h","🇺🇸 Estados Unidos","🇹🇷 Turquia"],
+                ["25/06","19h","🇵🇾 Paraguai","🇺🇸 Estados Unidos"],["25/06","19h","🇹🇷 Turquia","🇦🇺 Austrália"],
+                ["14/06","13h","🇩🇪 Alemanha","🇨🇼 Curaçao"],["14/06","19h","🇨🇮 Costa do Marfim","🇪🇨 Equador"],
+                ["20/06","16h","🇪🇨 Equador","🇩🇪 Alemanha"],["20/06","22h","🇨🇼 Curaçao","🇨🇮 Costa do Marfim"],
+                ["26/06","16h","🇩🇪 Alemanha","🇨🇮 Costa do Marfim"],["26/06","16h","🇪🇨 Equador","🇨🇼 Curaçao"],
+                ["14/06","16h","🇳🇱 Holanda","🇯🇵 Japão"],["14/06","22h","🇸🇪 Suécia","🇹🇳 Tunísia"],
+                ["20/06","19h","🇯🇵 Japão","🇸🇪 Suécia"],["20/06","22h","🇳🇱 Holanda","🇹🇳 Tunísia"],
+                ["26/06","19h","🇯🇵 Japão","🇹🇳 Tunísia"],["26/06","19h","🇳🇱 Holanda","🇸🇪 Suécia"],
+                ["15/06","13h","🇧🇪 Bélgica","🇪🇬 Egito"],["15/06","19h","🇮🇷 Irã","🇳🇿 Nova Zelândia"],
+                ["21/06","16h","🇪🇬 Egito","🇮🇷 Irã"],["21/06","22h","🇧🇪 Bélgica","🇳🇿 Nova Zelândia"],
+                ["27/06","16h","🇧🇪 Bélgica","🇮🇷 Irã"],["27/06","16h","🇪🇬 Egito","🇳🇿 Nova Zelândia"],
+                ["15/06","16h","🇪🇸 Espanha","🇨🇻 Cabo Verde"],["15/06","22h","🇸🇦 Arábia Saudita","🇺🇾 Uruguai"],
+                ["21/06","19h","🇨🇻 Cabo Verde","🇸🇦 Arábia Saudita"],["21/06","22h","🇪🇸 Espanha","🇺🇾 Uruguai"],
+                ["27/06","19h","🇪🇸 Espanha","🇸🇦 Arábia Saudita"],["27/06","19h","🇨🇻 Cabo Verde","🇺🇾 Uruguai"],
+                ["16/06","13h","🇫🇷 França","🇸🇳 Senegal"],["16/06","19h","🇮🇶 Iraque","🇳🇴 Noruega"],
+                ["22/06","16h","🇸🇳 Senegal","🇮🇶 Iraque"],["22/06","22h","🇫🇷 França","🇳🇴 Noruega"],
+                ["27/06","22h","🇫🇷 França","🇮🇶 Iraque"],["27/06","22h","🇸🇳 Senegal","🇳🇴 Noruega"],
+                ["16/06","16h","🇦🇷 Argentina","🇩🇿 Argélia"],["16/06","22h","🇦🇹 Áustria","🇯🇴 Jordânia"],
+                ["22/06","19h","🇩🇿 Argélia","🇦🇹 Áustria"],["22/06","22h","🇦🇷 Argentina","🇯🇴 Jordânia"],
+                ["27/06","13h","🇦🇷 Argentina","🇦🇹 Áustria"],["27/06","13h","🇩🇿 Argélia","🇯🇴 Jordânia"],
+                ["17/06","13h","🇵🇹 Portugal","🇨🇩 RD Congo"],["17/06","19h","🇺🇿 Uzbequistão","🇨🇴 Colômbia"],
+                ["23/06","16h","🇨🇩 RD Congo","🇺🇿 Uzbequistão"],["23/06","22h","🇵🇹 Portugal","🇨🇴 Colômbia"],
+                ["27/06","16h","🇵🇹 Portugal","🇺🇿 Uzbequistão"],["27/06","16h","🇨🇩 RD Congo","🇨🇴 Colômbia"],
+                ["17/06","16h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇭🇷 Croácia"],["17/06","22h","🇬🇭 Gana","🇵🇦 Panamá"],
+                ["23/06","19h","🇭🇷 Croácia","🇬🇭 Gana"],["23/06","22h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇵🇦 Panamá"],
+                ["27/06","19h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇬🇭 Gana"],["27/06","19h","🇭🇷 Croácia","🇵🇦 Panamá"]
             ];
-            for(let g=0;g<12;g++) for(let r=0;r<3;r++) for(let m=0;m<2;m++) {
-                const idx = g*6 + r*2 + m;
-                officialMatches[`${g}-${r}-${m}`] = { date: matchData[idx][0], time: matchData[idx][1], home: matchData[idx][2], away: matchData[idx][3] };
-            }
 
-            const scores = {};
-            const knockoutScores = {};
-
-            function getMatchDetails(gi,ri,mi) { return officialMatches[`${gi}-${ri}-${mi}`] || { date:"?",time:"?",home:"?",away:"?" }; }
-            function getScore(gi,ri,mi) { return scores[`${gi}-${ri}-${mi}`] || null; }
-            function setScore(gi,ri,mi,home,away) {
-                const key = `${gi}-${ri}-${mi}`;
-                if(home==='' && away==='') delete scores[key];
-                else scores[key] = { home: home!==''?parseInt(home):null, away: away!==''?parseInt(away):null };
-            }
-            function isScoreComplete(s) { return s && s.home!==null && s.away!==null && !isNaN(s.home) && !isNaN(s.away); }
-
-            function calculateStandings(gi) {
-                const group = groupsData[gi];
-                const stats = {};
-                group.teams.forEach(t => stats[t] = { pts:0, j:0, v:0, e:0, d:0, gp:0, gc:0, sg:0 });
-                for(let ri=0;ri<3;ri++) for(let mi=0;mi<2;mi++) {
-                    const sc = getScore(gi,ri,mi);
-                    if(!isScoreComplete(sc)) continue;
-                    const det = getMatchDetails(gi,ri,mi);
-                    const ht=det.home, at=det.away;
-                    if(!stats[ht]||!stats[at]) continue;
-                    stats[ht].j++; stats[at].j++;
-                    stats[ht].gp+=sc.home; stats[ht].gc+=sc.away;
-                    stats[at].gp+=sc.away; stats[at].gc+=sc.home;
-                    if(sc.home>sc.away){stats[ht].pts+=3;stats[ht].v++;stats[at].d++;}
-                    else if(sc.home<sc.away){stats[at].pts+=3;stats[at].v++;stats[ht].d++;}
-                    else{stats[ht].pts+=1;stats[at].pts+=1;stats[ht].e++;stats[at].e++;}
+            // Mapear para chave "grupo-round-match"
+            const matchDetails = {};
+            for (let g = 0; g < 12; g++) {
+                for (let r = 0; r < 3; r++) {
+                    for (let m = 0; m < 2; m++) {
+                        const idx = g * 6 + r * 2 + m;
+                        matchDetails[`${g}-${r}-${m}`] = {
+                            date: rawMatches[idx][0],
+                            time: rawMatches[idx][1],
+                            home: rawMatches[idx][2],
+                            away: rawMatches[idx][3]
+                        };
+                    }
                 }
-                group.teams.forEach(t => stats[t].sg = stats[t].gp - stats[t].gc);
-                const sorted = [...group.teams].sort((a,b) => stats[b].pts-stats[a].pts || stats[b].sg-stats[a].sg || stats[b].gp-stats[a].gp);
+            }
+
+            // Placar dos grupos: chave "g-r-m" -> {home, away}
+            const groupScores = {};
+            // Placar do mata-mata: chave "fase-match" -> {home, away}
+            const koScores = {};
+
+            function getGroupScore(g, r, m) { return groupScores[`${g}-${r}-${m}`] || null; }
+            function setGroupScore(g, r, m, h, a) {
+                const k = `${g}-${r}-${m}`;
+                if (h === '' && a === '') delete groupScores[k];
+                else groupScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null };
+            }
+            function isComplete(s) { return s && s.home !== null && s.away !== null && !isNaN(s.home) && !isNaN(s.away); }
+            function getKoScore(round, m) { return koScores[`${round}-${m}`] || null; }
+            function setKoScore(round, m, h, a) {
+                const k = `${round}-${m}`;
+                if (h === '' && a === '') delete koScores[k];
+                else koScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null };
+            }
+
+            function calcStandings(gi) {
+                const teams = groupsData[gi].slice(1);
+                const stats = {};
+                teams.forEach(t => stats[t] = { pts: 0, j: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0, sg: 0 });
+                for (let r = 0; r < 3; r++) {
+                    for (let m = 0; m < 2; m++) {
+                        const sc = getGroupScore(gi, r, m);
+                        if (!isComplete(sc)) continue;
+                        const det = matchDetails[`${gi}-${r}-${m}`];
+                        const h = det.home, a = det.away;
+                        if (!stats[h] || !stats[a]) continue;
+                        stats[h].j++; stats[a].j++;
+                        stats[h].gp += sc.home; stats[h].gc += sc.away;
+                        stats[a].gp += sc.away; stats[a].gc += sc.home;
+                        if (sc.home > sc.away) { stats[h].pts += 3; stats[h].v++; stats[a].d++; }
+                        else if (sc.home < sc.away) { stats[a].pts += 3; stats[a].v++; stats[h].d++; }
+                        else { stats[h].pts += 1; stats[a].pts += 1; stats[h].e++; stats[a].e++; }
+                    }
+                }
+                teams.forEach(t => stats[t].sg = stats[t].gp - stats[t].gc);
+                const sorted = [...teams].sort((a, b) => stats[b].pts - stats[a].pts || stats[b].sg - stats[a].sg || stats[b].gp - stats[a].gp);
                 return { sorted, stats };
             }
 
-            function countPlayed(gi) { let c=0; for(let ri=0;ri<3;ri++) for(let mi=0;mi<2;mi++) if(isScoreComplete(getScore(gi,ri,mi))) c++; return c; }
-
-            function getQualifiedTeams() {
-                const firsts = [], seconds = [], thirds = [];
-                for(let gi=0;gi<12;gi++) {
-                    const { sorted, stats } = calculateStandings(gi);
-                    if(sorted.length>=3 && countPlayed(gi)===6) {
-                        firsts.push({ team: sorted[0], group: groupsData[gi].name, pts: stats[sorted[0]].pts, sg: stats[sorted[0]].sg });
-                        seconds.push({ team: sorted[1], group: groupsData[gi].name, pts: stats[sorted[1]].pts, sg: stats[sorted[1]].sg });
-                        thirds.push({ team: sorted[2], group: groupsData[gi].name, pts: stats[sorted[2]].pts, sg: stats[sorted[2]].sg, gp: stats[sorted[2]].gp, j: stats[sorted[2]].j });
-                    }
-                }
-                thirds.sort((a,b) => b.pts-a.pts || b.sg-a.sg || b.gp-a.gp);
-                return { firsts, seconds, thirds: thirds.slice(0,8) };
+            function countPlayed(gi) {
+                let c = 0;
+                for (let r = 0; r < 3; r++) for (let m = 0; m < 2; m++) if (isComplete(getGroupScore(gi, r, m))) c++;
+                return c;
             }
 
             function allGroupsComplete() {
-                for(let gi=0;gi<12;gi++) if(countPlayed(gi)<6) return false;
+                for (let g = 0; g < 12; g++) if (countPlayed(g) < 6) return false;
                 return true;
             }
 
-            function getKnockoutScore(round, matchIdx) {
-                const key = `${round}-${matchIdx}`;
-                return knockoutScores[key] || null;
-            }
-            function setKnockoutScore(round, matchIdx, home, away) {
-                const key = `${round}-${matchIdx}`;
-                if(home==='' && away==='') delete knockoutScores[key];
-                else knockoutScores[key] = { home: home!==''?parseInt(home):null, away: away!==''?parseInt(away):null };
-            }
-            function getKnockoutWinner(round, matchIdx, team1, team2) {
-                const sc = getKnockoutScore(round, matchIdx);
-                if(!sc || !isScoreComplete(sc)) return null;
-                if(sc.home > sc.away) return team1;
-                if(sc.away > sc.home) return team2;
-                return null; // Empate não resolvido (pênaltis seriam necessários)
+            function getQualified() {
+                const firsts = [], seconds = [], thirds = [];
+                for (let g = 0; g < 12; g++) {
+                    const { sorted, stats } = calcStandings(g);
+                    if (sorted.length >= 3 && countPlayed(g) === 6) {
+                        firsts.push({ team: sorted[0], group: groupsData[g][0], pts: stats[sorted[0]].pts, sg: stats[sorted[0]].sg });
+                        seconds.push({ team: sorted[1], group: groupsData[g][0], pts: stats[sorted[1]].pts, sg: stats[sorted[1]].sg });
+                        thirds.push({ team: sorted[2], group: groupsData[g][0], pts: stats[sorted[2]].pts, sg: stats[sorted[2]].sg, gp: stats[sorted[2]].gp });
+                    }
+                }
+                thirds.sort((a, b) => b.pts - a.pts || b.sg - a.sg || b.gp - a.gp);
+                return { firsts, seconds, thirds: thirds.slice(0, 8) };
             }
 
-            function generateRound32() {
-                const { firsts, seconds, thirds } = getQualifiedTeams();
-                if(firsts.length<12) return [];
-                // Pareamento simplificado: 1ºs vs 3ºs e 2ºs vs 2ºs
+            function generateR32() {
+                const { firsts, seconds, thirds } = getQualified();
+                if (firsts.length < 12) return [];
                 const matches = [];
-                const allFirsts = [...firsts].sort((a,b) => b.pts-a.pts || b.sg-a.sg);
-                const allSeconds = [...seconds].sort((a,b) => b.pts-a.pts || b.sg-a.sg);
-                const allThirds = [...thirds];
-                // 8 jogos: melhores 1ºs vs 3ºs
-                for(let i=0;i<8;i++) {
-                    matches.push({ team1: allFirsts[i].team, team2: allThirds[i]?.team || "A definir", from1: allFirsts[i].group, from2: allThirds[i]?.group || "?" });
-                }
-                // 8 jogos: 2ºs vs 2ºs e 1ºs restantes vs 2ºs
-                const remainingFirsts = allFirsts.slice(8);
-                for(let i=0;i<4;i++) {
-                    matches.push({ team1: remainingFirsts[i]?.team || "A definir", team2: allSeconds[i+8]?.team || allSeconds[i]?.team || "A definir", from1: remainingFirsts[i]?.group||"?", from2: allSeconds[i+8]?.group || allSeconds[i]?.group || "?" });
-                }
-                for(let i=0;i<4;i++) {
-                    matches.push({ team1: allSeconds[i].team, team2: allSeconds[i+4].team, from1: allSeconds[i].group, from2: allSeconds[i+4].group });
-                }
-                return matches.slice(0,16);
+                const fSorted = [...firsts].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
+                const sSorted = [...seconds].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
+                for (let i = 0; i < 8; i++) matches.push({ t1: fSorted[i].team, t2: thirds[i]?.team || "?", g1: fSorted[i].group, g2: thirds[i]?.group || "?" });
+                const rf = fSorted.slice(8);
+                for (let i = 0; i < 4; i++) matches.push({ t1: rf[i]?.team || "?", t2: sSorted[i + 8]?.team || sSorted[i]?.team || "?", g1: rf[i]?.group || "?", g2: sSorted[i + 8]?.group || "?" });
+                for (let i = 0; i < 4; i++) matches.push({ t1: sSorted[i].team, t2: sSorted[i + 4].team, g1: sSorted[i].group, g2: sSorted[i + 4].group });
+                return matches.slice(0, 16);
             }
 
-            function simulateKnockout(round32Matches) {
-                const winners = [];
-                for(let i=0;i<16;i++) {
-                    const winner = getKnockoutWinner('round32', i, round32Matches[i].team1, round32Matches[i].team2);
-                    winners.push(winner || "Vencedor "+(i+1));
-                }
-                // Oitavas
-                const round16 = [];
-                for(let i=0;i<8;i++) round16.push({ team1: winners[i*2], team2: winners[i*2+1] });
-                const qwinners = [];
-                for(let i=0;i<8;i++) {
-                    const w = getKnockoutWinner('round16', i, round16[i].team1, round16[i].team2);
-                    qwinners.push(w || "Vencedor Oitavas "+(i+1));
-                }
-                // Quartas
-                const quarters = [];
-                for(let i=0;i<4;i++) quarters.push({ team1: qwinners[i*2], team2: qwinners[i*2+1] });
-                const swinners = [];
-                for(let i=0;i<4;i++) {
-                    const w = getKnockoutWinner('quarters', i, quarters[i].team1, quarters[i].team2);
-                    swinners.push(w || "Vencedor Quartas "+(i+1));
-                }
-                // Semis
-                const semis = [
-                    { team1: swinners[0], team2: swinners[1] },
-                    { team1: swinners[2], team2: swinners[3] }
-                ];
-                const fwinners = [];
-                for(let i=0;i<2;i++) {
-                    const w = getKnockoutWinner('semis', i, semis[i].team1, semis[i].team2);
-                    fwinners.push(w || "Vencedor Semi "+(i+1));
-                }
-                // Final
-                const finalMatch = { team1: fwinners[0], team2: fwinners[1] };
-                const champion = getKnockoutWinner('final', 0, finalMatch.team1, finalMatch.team2);
-                return { round16, quarters, semis, finalMatch, champion };
+            function getKoWinner(round, m, t1, t2) {
+                const sc = getKoScore(round, m);
+                if (!sc || !isComplete(sc)) return null;
+                return sc.home > sc.away ? t1 : sc.away > sc.home ? t2 : null;
             }
 
-            // Render functions
-            const gc = document.getElementById('groupsContainer');
-            const gdc = document.getElementById('groupDetailContainer');
-            const amc = document.getElementById('allMatchesContainer');
-            const tpc = document.getElementById('thirdPlacesContainer');
-            const r32c = document.getElementById('round32Container');
-            const r16c = document.getElementById('round16Container');
-            const qc = document.getElementById('quartersContainer');
-            const sc = document.getElementById('semisContainer');
-            const fc = document.getElementById('finalContainer');
-            const allPanels = document.querySelectorAll('.panel');
-            const allTabs = document.querySelectorAll('.tab-btn');
+            function simulateBracket(r32) {
+                const w32 = [];
+                for (let i = 0; i < 16; i++) w32.push(getKoWinner('r32', i, r32[i].t1, r32[i].t2) || `Vencedor ${i + 1}`);
+                const r16 = [];
+                for (let i = 0; i < 8; i++) r16.push({ t1: w32[i * 2], t2: w32[i * 2 + 1] });
+                const w16 = [];
+                for (let i = 0; i < 8; i++) w16.push(getKoWinner('r16', i, r16[i].t1, r16[i].t2) || `Vencedor O${i + 1}`);
+                const qf = [];
+                for (let i = 0; i < 4; i++) qf.push({ t1: w16[i * 2], t2: w16[i * 2 + 1] });
+                const wqf = [];
+                for (let i = 0; i < 4; i++) wqf.push(getKoWinner('qf', i, qf[i].t1, qf[i].t2) || `Vencedor Q${i + 1}`);
+                const sf = [{ t1: wqf[0], t2: wqf[1] }, { t1: wqf[2], t2: wqf[3] }];
+                const wsf = [];
+                for (let i = 0; i < 2; i++) wsf.push(getKoWinner('sf', i, sf[i].t1, sf[i].t2) || `Vencedor S${i + 1}`);
+                const fin = { t1: wsf[0], t2: wsf[1] };
+                const champ = getKoWinner('final', 0, fin.t1, fin.t2);
+                return { r16, qf, sf, fin, champ };
+            }
+
+            // ============ RENDER ============
+            const $ = id => document.getElementById(id);
+            const groupsGrid = $('groupsGrid');
+            const groupDetail = $('groupDetail');
+            const allMatchesContent = $('allMatchesContent');
+            const thirdsContent = $('thirdsContent');
+            const r32Content = $('r32Content');
+            const r16Content = $('r16Content');
+            const qfContent = $('qfContent');
+            const sfContent = $('sfContent');
+            const finalContent = $('finalContent');
+            const panels = {
+                groups: $('panelGroups'), matches: $('panelMatches'), thirds: $('panelThirds'),
+                r32: $('panelR32'), r16: $('panelR16'), qf: $('panelQF'), sf: $('panelSF'), final: $('panelFinal')
+            };
+            const tabBtns = document.querySelectorAll('.tab-btn');
 
             function renderGroups() {
-                gc.innerHTML = groupsData.map((g,i) => {
+                groupsGrid.innerHTML = groupsData.map((g, i) => {
                     const pc = countPlayed(i);
-                    const { sorted } = calculateStandings(i);
-                    const isBrazil = g.name==="Grupo C";
-                    const teamOrder = pc===6 && sorted.length===4 ? sorted : g.teams;
-                    return `<div class="group-card${isBrazil?' brazil-group':''}" data-group-index="${i}">
-                <div class="group-title">${g.name}${isBrazil?' 🇧🇷':''}</div>
-                <ul class="team-list">${teamOrder.map((t,idx)=>{
-                  const posClass = pc===6 ? (idx===0?'pos-1st':idx===1?'pos-2nd':idx===2?'pos-3rd':'') : '';
-                  return `<li class="team-item${t.includes('Brasil')?' brazil-team':''}">${posClass?`<span class="position-badge ${posClass}">${idx+1}º</span>`:''}<span>${t}</span></li>`;
+                    const { sorted } = calcStandings(i);
+                    const isB = g[0] === "Grupo C";
+                    const order = (pc === 6 && sorted.length === 4) ? sorted : g.slice(1);
+                    return `<div class="group-card${isB ? ' brazil-group' : ''}" data-gi="${i}">
+                <div class="group-title">${g[0]}${isB ? ' 🇧🇷' : ''}</div>
+                <ul class="team-list">${order.map((t, idx) => {
+                  let cls = '';
+                  if (pc === 6) { if (idx === 0) cls = 'pos-1'; else if (idx === 1) cls = 'pos-2'; else if (idx === 2) cls = 'pos-3'; }
+                  return `<li class="team-item">${cls ? `<span class="pos-badge ${cls}">${idx + 1}º</span>` : ''}<span>${t}</span></li>`;
                 }).join('')}</ul>
                 <div class="games-count">${pc}/6 jogos</div></div>`;
                 }).join('');
-                document.querySelectorAll('.group-card').forEach(c => c.addEventListener('click', function(){ showGroupDetail(parseInt(this.dataset.groupIndex)); }));
+                document.querySelectorAll('.group-card').forEach(c => {
+                    c.addEventListener('click', () => showGroupDetail(parseInt(c.dataset.gi)));
+                });
             }
 
             function showGroupDetail(gi) {
-                const group = groupsData[gi];
-                const { sorted, stats } = calculateStandings(gi);
+                const g = groupsData[gi];
+                const { sorted, stats } = calcStandings(gi);
                 const pc = countPlayed(gi);
-                const allPlayed = pc===6;
-                let html = `<button class="back-btn" onclick="window.backToGroups()">← Voltar</button>
-            <div class="group-detail-title">${group.name}</div>
-            <div class="section-title">📊 Classificação ${pc>0?`(${pc}/6 jogos)`:''}</div>
-            <table class="standings-table"><thead><tr><th>Pos</th><th>Seleção</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th></tr></thead><tbody>`;
-                if(pc===0) html += '<tr><td colspan="10" style="text-align:center;padding:2rem;">⚽ Preencha os placares</td></tr>';
-                else sorted.forEach((t,idx) => {
-                    const s=stats[t]; let rc='';
-                    if(allPlayed){ if(idx<2) rc='qualified-row'; else if(idx===2) rc='third-row'; else rc='eliminated-row'; }
-                    html += `<tr class="${rc}"><td>${idx+1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg>0?'+'+s.sg:s.sg}</td></tr>`;
+                const ap = pc === 6;
+                let h = `<button class="back-btn" onclick="window.backToGroups()">← Voltar</button>
+            <div class="detail-title">${g[0]}</div>
+            <div class="section-title">📊 Classificação (${pc}/6 jogos)</div>
+            <table><thead><tr><th>Pos</th><th>Seleção</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th></tr></thead><tbody>`;
+                if (pc === 0) h += '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>';
+                else sorted.forEach((t, idx) => {
+                    const s = stats[t];
+                    let rc = '';
+                    if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc = 'row-eliminated'; }
+                    h += `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`;
                 });
-                html += `</tbody></table>`;
-                html += `<div class="section-title">⚽ Confrontos</div>`;
-                for(let ri=0;ri<3;ri++) {
-                    html += `<div class="round-header">Rodada ${ri+1}</div>`;
-                    for(let mi=0;mi<2;mi++) {
-                        const det = getMatchDetails(gi,ri,mi);
-                        const sc = getScore(gi,ri,mi);
-                        const played = isScoreComplete(sc);
-                        html += `<div class="match-edit-row">
-                  <div class="match-teams-display"><span>${det.home}</span> vs <span>${det.away}</span><span class="match-status ${played?'status-played':'status-pending'}">${played?'✓':'Pendente'}</span></div>
-                  <div class="score-input-group"><input type="number" class="score-input home-score" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-group="${gi}" data-round="${ri}" data-match="${mi}" data-side="home"><span class="score-separator">×</span><input type="number" class="score-input away-score" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-group="${gi}" data-round="${ri}" data-match="${mi}" data-side="away"></div>
-                  <div class="match-info-group"><span class="match-date">📅 ${det.date}</span><span class="match-time">🕐 ${det.time}</span></div></div>`;
+                h += `</tbody></table><div class="section-title">⚽ Confrontos</div>`;
+                for (let r = 0; r < 3; r++) {
+                    h += `<div style="font-weight:700;color:#fedd00;margin-top:0.6rem;">Rodada ${r + 1}</div>`;
+                    for (let m = 0; m < 2; m++) {
+                        const det = matchDetails[`${gi}-${r}-${m}`];
+                        const sc = getGroupScore(gi, r, m);
+                        const pl = isComplete(sc);
+                        h += `<div class="match-row">
+                  <div class="match-teams"><span>${det.home}</span> vs <span>${det.away}</span><span class="badge-status ${pl ? 'badge-done' : 'badge-pending'}">${pl ? '✓' : 'Pendente'}</span></div>
+                  <div class="score-group">
+                    <input type="number" class="score-input gs-home" value="${sc && sc.home !== null ? sc.home : ''}" min="0" max="20" placeholder="-" data-g="${gi}" data-r="${r}" data-m="${m}" data-side="home">
+                    <span class="score-sep">×</span>
+                    <input type="number" class="score-input gs-away" value="${sc && sc.away !== null ? sc.away : ''}" min="0" max="20" placeholder="-" data-g="${gi}" data-r="${r}" data-m="${m}" data-side="away">
+                  </div>
+                  <div class="match-meta"><span class="badge badge-date">📅 ${det.date}</span><span class="badge badge-time">🕐 ${det.time}</span></div>
+                </div>`;
                     }
                 }
-                gdc.innerHTML = html;
-                gdc.style.display='block'; gc.style.display='none';
-                document.querySelectorAll('.score-input').forEach(inp => { inp.removeEventListener('input',handler); inp.addEventListener('input',handler); });
+                groupDetail.innerHTML = h;
+                groupDetail.style.display = 'block';
+                groupsGrid.style.display = 'none';
+                document.querySelectorAll('.gs-home, .gs-away').forEach(inp => {
+                    inp.addEventListener('input', groupScoreHandler);
+                });
             }
 
-            window.backToGroups = function(){ gdc.style.display='none'; gc.style.display=''; renderGroups(); updateKnockoutTabs(); };
+            window.backToGroups = function () {
+                groupDetail.style.display = 'none';
+                groupsGrid.style.display = '';
+                renderGroups();
+                updateKnockoutTabs();
+            };
 
-            function handler() {
-                const gi=parseInt(this.dataset.group), ri=parseInt(this.dataset.round), mi=parseInt(this.dataset.match);
-                const row=this.closest('.match-edit-row');
-                setScore(gi,ri,mi,row.querySelector('.home-score').value.trim(),row.querySelector('.away-score').value.trim());
-                const sc=getScore(gi,ri,mi);
-                const badge=row.querySelector('.match-status');
-                if(isScoreComplete(sc)){badge.textContent='✓';badge.className='match-status status-played';}
-                else{badge.textContent='Pendente';badge.className='match-status status-pending';}
-                updateStandings(gi);
+            function groupScoreHandler() {
+                const gi = parseInt(this.dataset.g), r = parseInt(this.dataset.r), m = parseInt(this.dataset.m);
+                const row = this.closest('.match-row');
+                const hv = row.querySelector('.gs-home').value.trim();
+                const av = row.querySelector('.gs-away').value.trim();
+                setGroupScore(gi, r, m, hv, av);
+                const sc = getGroupScore(gi, r, m);
+                const badge = row.querySelector('.badge-status');
+                if (isComplete(sc)) { badge.textContent = '✓';
+                    badge.className = 'badge-status badge-done'; } else { badge.textContent = 'Pendente';
+                    badge.className = 'badge-status badge-pending'; }
+                updateStandingsInDetail(gi);
                 updateKnockoutTabs();
             }
 
-            function updateStandings(gi) {
-                const { sorted, stats } = calculateStandings(gi);
+            function updateStandingsInDetail(gi) {
+                const { sorted, stats } = calcStandings(gi);
                 const pc = countPlayed(gi);
-                const allPlayed = pc===6;
-                const tb = document.querySelector('.standings-table tbody');
-                if(!tb) return;
-                if(pc===0){ tb.innerHTML='<tr><td colspan="10" style="text-align:center;">⚽ Preencha os placares</td></tr>'; return; }
-                tb.innerHTML = sorted.map((t,idx) => {
-                    const s=stats[t]; let rc='';
-                    if(allPlayed){ if(idx<2) rc='qualified-row'; else if(idx===2) rc='third-row'; else rc='eliminated-row'; }
-                    return `<tr class="${rc}"><td>${idx+1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg>0?'+'+s.sg:s.sg}</td></tr>`;
+                const ap = pc === 6;
+                const tb = document.querySelector('table tbody');
+                if (!tb) return;
+                if (pc === 0) { tb.innerHTML =
+                        '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>'; return; }
+                tb.innerHTML = sorted.map((t, idx) => {
+                    const s = stats[t];
+                    let rc = '';
+                    if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc =
+                            'row-eliminated'; }
+                    return `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`;
                 }).join('');
+                const titleEl = document.querySelector('.section-title');
+                if (titleEl) titleEl.textContent = `📊 Classificação (${pc}/6 jogos)`;
                 renderGroups();
             }
 
             function renderAllMatches() {
-                amc.innerHTML = groupsData.map((g,gi) => {
-                    const pc=countPlayed(gi);
-                    let h=`<div class="group-detail-title" style="font-size:1.3rem;">${g.name} (${pc}/6)</div>`;
-                    for(let ri=0;ri<3;ri++){ h+=`<div class="round-header">Rodada ${ri+1}</div>`; for(let mi=0;mi<2;mi++){ const det=getMatchDetails(gi,ri,mi); const sc=getScore(gi,ri,mi); const played=isScoreComplete(sc); h+=`<div class="match-edit-row"><div class="match-teams-display"><span>${det.home}</span> vs <span>${det.away}</span><span class="match-status ${played?'status-played':'status-pending'}">${played?'✓':'Pendente'}</span></div><div class="score-input-group"><span class="score-separator">${played?sc.home+' × '+sc.away:'- × -'}</span></div><div class="match-info-group"><span class="match-date">📅 ${det.date}</span><span class="match-time">🕐 ${det.time}</span></div></div>`; } } return h;
+                allMatchesContent.innerHTML = groupsData.map((g, gi) => {
+                    const pc = countPlayed(gi);
+                    let h = `<div class="detail-title" style="font-size:1.2rem;">${g[0]} (${pc}/6)</div>`;
+                    for (let r = 0; r < 3; r++) {
+                        h +=
+                        `<div style="font-weight:700;color:#fedd00;margin-top:0.5rem;">Rodada ${r + 1}</div>`;
+                        for (let m = 0; m < 2; m++) {
+                            const det = matchDetails[`${gi}-${r}-${m}`];
+                            const sc = getGroupScore(gi, r, m);
+                            const pl = isComplete(sc);
+                            h += `<div class="match-row">
+                    <div class="match-teams"><span>${det.home}</span> vs <span>${det.away}</span><span class="badge-status ${pl?'badge-done':'badge-pending'}">${pl?'✓':'Pendente'}</span></div>
+                    <div class="score-group"><span class="score-sep">${pl?sc.home+' × '+sc.away:'- × -'}</span></div>
+                    <div class="match-meta"><span class="badge badge-date">📅 ${det.date}</span><span class="badge badge-time">🕐 ${det.time}</span></div></div>`;
+                        }
+                    }
+                    return h;
                 }).join('');
             }
 
-            function renderThirdPlaces() {
-                const allThirds = [];
-                for(let gi=0;gi<12;gi++) {
-                    const { sorted, stats } = calculateStandings(gi);
-                    if(sorted.length>=3 && countPlayed(gi)===6) allThirds.push({ team:sorted[2], group:groupsData[gi].name, pts:stats[sorted[2]].pts, sg:stats[sorted[2]].sg, gp:stats[sorted[2]].gp, j:stats[sorted[2]].j });
+            function renderThirds() {
+                const allT = [];
+                for (let g = 0; g < 12; g++) {
+                    const { sorted, stats } = calcStandings(g);
+                    if (sorted.length >= 3 && countPlayed(g) === 6) allT.push({ team: sorted[2], group: groupsData[g][0],
+                        pts: stats[sorted[2]].pts, sg: stats[sorted[2]].sg, gp: stats[sorted[2]].gp, j: stats[sorted[2]].j });
                 }
-                allThirds.sort((a,b) => b.pts-a.pts || b.sg-a.sg || b.gp-a.gp);
-                let html = `<div class="group-detail-title">📊 Melhores 3ºs</div><table class="standings-table"><thead><tr><th>Pos</th><th>Grupo</th><th>Seleção</th><th>P</th><th>J</th><th>SG</th><th>GP</th></tr></thead><tbody>`;
-                allThirds.forEach((t,i) => {
-                    html += `<tr class="${i<8?'qualified-row':'eliminated-row'}"><td>${i+1}º</td><td>${t.group}</td><td>${t.team}</td><td><strong>${t.pts}</strong></td><td>${t.j}</td><td>${t.sg>0?'+'+t.sg:t.sg}</td><td>${t.gp}</td></tr>`;
+                allT.sort((a, b) => b.pts - a.pts || b.sg - a.sg || b.gp - a.gp);
+                let h = `<div class="detail-title">📊 Melhores 3ºs</div>
+            <table><thead><tr><th>Pos</th><th>Grupo</th><th>Seleção</th><th>P</th><th>J</th><th>SG</th><th>GP</th></tr></thead><tbody>`;
+                allT.forEach((t, i) => {
+                    h +=
+                        `<tr class="${i<8?'row-qualified':'row-eliminated'}"><td>${i+1}º</td><td>${t.group}</td><td>${t.team}</td><td><strong>${t.pts}</strong></td><td>${t.j}</td><td>${t.sg>0?'+'+t.sg:t.sg}</td><td>${t.gp}</td></tr>`;
                 });
-                html += `</tbody></table>`;
-                tpc.innerHTML = html;
+                h += `</tbody></table>`;
+                thirdsContent.innerHTML = h;
             }
 
-            function renderKnockoutStage(round, matches, container, roundName) {
-                let html = `<div class="bracket-round"><h3>${roundName}</h3><div class="bracket-matches">`;
-                matches.forEach((m,i) => {
-                    const sc = getKnockoutScore(round, i);
-                    const played = sc && isScoreComplete(sc);
-                    const winner = played ? (sc.home>sc.away ? m.team1 : m.team2) : null;
-                    html += `<div class="bracket-match">
-                <span class="bracket-team${winner===m.team1?' winner':''}">${m.team1}</span>
-                <span class="bracket-vs">vs</span>
-                <span class="bracket-team${winner===m.team2?' winner':''}">${m.team2}</span>
-                <div class="score-input-group">
-                  <input type="number" class="score-input ko-home" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-round="${round}" data-match="${i}" data-side="home">
-                  <span class="score-separator">×</span>
-                  <input type="number" class="score-input ko-away" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-round="${round}" data-match="${i}" data-side="away">
+            function renderKoStage(round, matches, container, title) {
+                if (!matches.length) { container.innerHTML =
+                        '<div class="info-msg">Preencha todos os grupos primeiro.</div>'; return; }
+                let h = `<div class="bracket-round"><h3>${title}</h3>`;
+                matches.forEach((m, i) => {
+                    const sc = getKoScore(round, i);
+                    const pl = sc && isComplete(sc);
+                    const w = pl ? (sc.home > sc.away ? m.t1 : m.t2) : null;
+                    h += `<div class="bracket-match">
+                <span class="bracket-team${w===m.t1?' winner':''}">${m.t1}</span>
+                <span class="score-sep">vs</span>
+                <span class="bracket-team${w===m.t2?' winner':''}">${m.t2}</span>
+                <div class="score-group">
+                  <input type="number" class="score-input ko-home" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="home">
+                  <span class="score-sep">×</span>
+                  <input type="number" class="score-input ko-away" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-round="${round}" data-m="${i}" data-side="away">
                 </div>
-                ${winner ? `<span style="color:#00ff55;font-weight:700;font-size:0.8rem;">🏆 ${winner}</span>` : ''}
+                ${w?`<span style="color:#00ff55;font-weight:700;font-size:0.8rem;">🏆 ${w}</span>`:''}
               </div>`;
                 });
-                html += `</div></div>`;
-                container.innerHTML = html;
-                container.querySelectorAll('.score-input').forEach(inp => {
-                    inp.removeEventListener('input', knockoutHandler);
-                    inp.addEventListener('input', knockoutHandler);
+                h += `</div>`;
+                container.innerHTML = h;
+                container.querySelectorAll('.ko-home, .ko-away').forEach(inp => {
+                    inp.addEventListener('input', koScoreHandler);
                 });
             }
 
-            function knockoutHandler() {
+            function koScoreHandler() {
                 const round = this.dataset.round;
-                const mi = parseInt(this.dataset.match);
+                const m = parseInt(this.dataset.m);
                 const row = this.closest('.bracket-match');
-                const homeVal = row.querySelector('.ko-home').value.trim();
-                const awayVal = row.querySelector('.ko-away').value.trim();
-                setKnockoutScore(round, mi, homeVal, awayVal);
-                updateAllKnockoutStages();
+                const hv = row.querySelector('.ko-home').value.trim();
+                const av = row.querySelector('.ko-away').value.trim();
+                setKoScore(round, m, hv, av);
+                updateAllKoStages();
             }
 
-            function updateAllKnockoutStages() {
-                if(!allGroupsComplete()) return;
-                const { firsts, seconds, thirds } = getQualifiedTeams();
-                if(firsts.length<12) return;
-                const round32Matches = generateRound32();
-                renderKnockoutStage('round32', round32Matches, r32c, '32 avos de final');
-                const { round16, quarters, semis, finalMatch, champion } = simulateKnockout(round32Matches);
-                renderKnockoutStage('round16', round16, r16c, 'Oitavas de final');
-                renderKnockoutStage('quarters', quarters, qc, 'Quartas de final');
-                renderKnockoutStage('semis', semis, sc, 'Semifinais');
-                let finalHtml = `<div class="bracket-round"><h3>🏆 Final</h3><div class="bracket-matches">`;
-                const fsc = getKnockoutScore('final', 0);
-                const fplayed = fsc && isScoreComplete(fsc);
-                const fwinner = fplayed ? (fsc.home>fsc.away ? finalMatch.team1 : finalMatch.team2) : null;
-                finalHtml += `<div class="bracket-match">
-              <span class="bracket-team${fwinner===finalMatch.team1?' winner':''}">${finalMatch.team1}</span>
-              <span class="bracket-vs">vs</span>
-              <span class="bracket-team${fwinner===finalMatch.team2?' winner':''}">${finalMatch.team2}</span>
-              <div class="score-input-group">
-                <input type="number" class="score-input ko-home" value="${fsc&&fsc.home!==null?fsc.home:''}" min="0" max="20" placeholder="-" data-round="final" data-match="0" data-side="home">
-                <span class="score-separator">×</span>
-                <input type="number" class="score-input ko-away" value="${fsc&&fsc.away!==null?fsc.away:''}" min="0" max="20" placeholder="-" data-round="final" data-match="0" data-side="away">
+            function updateAllKoStages() {
+                if (!allGroupsComplete()) return;
+                const r32 = generateR32();
+                if (!r32.length) return;
+                const { r16, qf, sf, fin, champ } = simulateBracket(r32);
+                renderKoStage('r32', r32, r32Content, '32 avos de final');
+                renderKoStage('r16', r16, r16Content, 'Oitavas de final');
+                renderKoStage('qf', qf, qfContent, 'Quartas de final');
+                renderKoStage('sf', sf, sfContent, 'Semifinais');
+                let fh = `<div class="bracket-round"><h3>🏆 Final</h3><div class="bracket-match">
+              <span class="bracket-team${champ===fin.t1?' winner':''}">${fin.t1}</span>
+              <span class="score-sep">vs</span>
+              <span class="bracket-team${champ===fin.t2?' winner':''}">${fin.t2}</span>
+              <div class="score-group">
+                <input type="number" class="score-input ko-home" value="${getKoScore('final',0)?.home??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="home">
+                <span class="score-sep">×</span>
+                <input type="number" class="score-input ko-away" value="${getKoScore('final',0)?.away??''}" min="0" max="20" placeholder="-" data-round="final" data-m="0" data-side="away">
               </div>
-            </div></div></div>`;
-                if(champion) finalHtml += `<div class="champion-card">🏆 CAMPEÃO: ${champion} 🏆</div>`;
-                fc.innerHTML = finalHtml;
-                fc.querySelectorAll('.score-input').forEach(inp => {
-                    inp.removeEventListener('input', knockoutHandler);
-                    inp.addEventListener('input', knockoutHandler);
+            </div></div>`;
+                if (champ) fh += `<div class="champion-card">🏆 CAMPEÃO: ${champ} 🏆</div>`;
+                finalContent.innerHTML = fh;
+                finalContent.querySelectorAll('.ko-home, .ko-away').forEach(inp => {
+                    inp.addEventListener('input', koScoreHandler);
                 });
             }
 
             function updateKnockoutTabs() {
                 const complete = allGroupsComplete();
-                ['tabRound32','tabRound16','tabQuarters','tabSemis','tabFinal'].forEach(id => {
+                ['tabR32', 'tabR16', 'tabQF', 'tabSF', 'tabFinal'].forEach(id => {
                     const tab = document.getElementById(id);
-                    if(complete) tab.classList.remove('locked');
+                    if (complete) tab.classList.remove('locked');
                     else tab.classList.add('locked');
                 });
-                if(complete) updateAllKnockoutStages();
+                if (complete) updateAllKoStages();
             }
 
-            function switchTab(id) {
-                allTabs.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
-                allPanels.forEach(p => p.classList.remove('active'));
-                const panelMap = {
-                    'groups': 'groupsPanel', 'all-matches': 'allMatchesPanel', 'third-places': 'thirdPlacesPanel',
-                    'round32': 'round32Panel', 'round16': 'round16Panel', 'quarters': 'quartersPanel',
-                    'semis': 'semisPanel', 'final': 'finalPanel'
-                };
-                const panelId = panelMap[id];
-                if(panelId) document.getElementById(panelId).classList.add('active');
-                if(id==='groups' && gdc.style.display==='block') window.backToGroups();
-                if(id==='all-matches') renderAllMatches();
-                if(id==='third-places') renderThirdPlaces();
-                if(allGroupsComplete() && ['round32','round16','quarters','semis','final'].includes(id)) updateAllKnockoutStages();
+            function switchTab(tabId) {
+                tabBtns.forEach(b => {
+                    b.classList.toggle('active', b.dataset.tab === tabId);
+                });
+                Object.keys(panels).forEach(k => panels[k].classList.remove('active'));
+                const map = { groups: 'groups', matches: 'matches', thirds: 'thirds', r32: 'r32', r16: 'r16', qf: 'qf',
+                    sf: 'sf', final: 'final' };
+                const panelKey = map[tabId];
+                if (panelKey && panels[panelKey]) panels[panelKey].classList.add('active');
+                if (tabId === 'groups' && groupDetail.style.display === 'block') window.backToGroups();
+                if (tabId === 'matches') renderAllMatches();
+                if (tabId === 'thirds') renderThirds();
+                if (allGroupsComplete() && ['r32', 'r16', 'qf', 'sf', 'final'].includes(tabId)) updateAllKoStages();
             }
 
-            allTabs.forEach(b => {
-                if(!b.classList.contains('locked')) b.addEventListener('click', e => switchTab(e.currentTarget.dataset.tab));
+            tabBtns.forEach(b => {
+                b.addEventListener('click', () => {
+                    if (b.classList.contains('locked')) return;
+                    switchTab(b.dataset.tab);
+                });
             });
 
+            // Tema
+            const body = document.body;
+            const themeToggle = $('themeToggle');
+            const themeIcon = $('themeIcon');
+            const themeText = $('themeText');
+
             function setTheme(m) {
-                if(m==='light'){ body.classList.add('light-mode'); document.getElementById('themeIcon').textContent='☀️'; document.getElementById('themeText').textContent='Claro'; localStorage.setItem('copa2026theme','light'); }
-                else{ body.classList.remove('light-mode'); document.getElementById('themeIcon').textContent='🌙'; document.getElementById('themeText').textContent='Escuro'; localStorage.setItem('copa2026theme','dark'); }
+                if (m === 'light') {
+                    body.classList.add('light-mode');
+                    themeIcon.textContent = '☀️';
+                    themeText.textContent = 'Claro';
+                    localStorage.setItem('copa2026theme', 'light');
+                } else {
+                    body.classList.remove('light-mode');
+                    themeIcon.textContent = '🌙';
+                    themeText.textContent = 'Escuro';
+                    localStorage.setItem('copa2026theme', 'dark');
+                }
             }
-            document.getElementById('themeToggle').addEventListener('click', ()=> setTheme(body.classList.contains('light-mode')?'dark':'light'));
-            document.addEventListener('keydown', function(e){ if(e.target.classList.contains('score-input')){ const allowed=[8,46,9,27,13,37,38,39,40]; if(allowed.includes(e.keyCode)||(e.keyCode>=48&&e.keyCode<=57)||(e.keyCode>=96&&e.keyCode<=105)) return; e.preventDefault(); }});
+            themeToggle.addEventListener('click', () => setTheme(body.classList.contains('light-mode') ? 'dark' :
+                'light'));
+
+            // Bloquear não-números nos inputs
+            document.addEventListener('keydown', function (e) {
+                if (e.target.classList.contains('score-input')) {
+                    const allowed = [8, 46, 9, 27, 13, 37, 38, 39, 40];
+                    if (allowed.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e
+                            .keyCode <= 105)) return;
+                    e.preventDefault();
+                }
+            });
 
             function init() {
-                renderGroups(); renderAllMatches(); renderThirdPlaces();
-                setTheme(localStorage.getItem('copa2026theme')==='light'?'light':'dark');
-                switchTab('groups'); updateKnockoutTabs();
+                renderGroups();
+                renderAllMatches();
+                renderThirds();
+                const saved = localStorage.getItem('copa2026theme');
+                setTheme(saved === 'light' ? 'light' : 'dark');
+                switchTab('groups');
+                updateKnockoutTabs();
             }
             window.addEventListener('DOMContentLoaded', init);
         })();
