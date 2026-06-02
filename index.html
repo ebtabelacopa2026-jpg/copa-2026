@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Copa do Mundo 2026 • Tabela Oficial FIFA • Brasil no Grupo C</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(160deg, #009c3b 0%, #00a859 25%, #1e7a3e 50%, #fedd00 75%, #ffcb00 100%);
+            background-attachment: fixed;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.5rem;
+            margin: 0;
+            transition: background 0.5s ease;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(0, 83, 179, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(254, 221, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body.light-mode {
+            background: linear-gradient(160deg, #f9f3e0 0%, #fff8dc 25%, #f0e68c 50%, #009c3b 90%, #007a2e 100%);
+            background-attachment: fixed;
+        }
+
+        body.light-mode::before {
+            background: radial-gradient(circle at 30% 40%, rgba(0, 83, 179, 0.08) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(254, 221, 0, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(0, 50, 20, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 3.5rem;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(254, 221, 0, 0.4);
+            transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        body.light-mode .container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(0, 156, 59, 0.4);
+        }
+
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(254, 221, 0, 0.3);
+        }
+
+        body.light-mode .header {
+            border-bottom: 2px solid rgba(0, 156, 59, 0.3);
+        }
+
+        .title-section {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .trophy-icon {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 8px 15px rgba(254, 221, 0, 0.6));
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fedd00, #ffcb00, #fedd00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+        }
+
+        body.light-mode h1 {
+            background: linear-gradient(135deg, #009c3b, #006622);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+        }
+
+        .brazil-highlight {
+            display: inline-block;
+            background: linear-gradient(135deg, #009c3b, #fedd00);
+            color: #005320;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+            border: 2px solid #fedd00;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(254, 221, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(254, 221, 0, 0.8);
+            }
+        }
+
+        .theme-toggle {
+            background: rgba(0, 83, 179, 0.2);
+            border: 2px solid rgba(254, 221, 0, 0.7);
+            color: #fedd00;
+            padding: 0.7rem 1.4rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(254, 221, 0, 0.25);
+            border-color: #fedd00;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(254, 221, 0, 0.4);
+        }
+
+        body.light-mode .theme-toggle {
+            background: rgba(0, 156, 59, 0.15);
+            border-color: #009c3b;
+            color: #006622;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(254, 221, 0, 0.25);
+            padding-bottom: 0.8rem;
+        }
+
+        body.light-mode .nav-tabs {
+            border-bottom-color: rgba(0, 156, 59, 0.25);
+        }
+
+        .tab-btn {
+            background: rgba(0, 83, 179, 0.15);
+            border: 1px solid rgba(254, 221, 0, 0.3);
+            padding: 0.7rem 1.6rem;
+            border-radius: 2.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fedd00;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(6px);
+            letter-spacing: 0.5px;
+        }
+
+        body.light-mode .tab-btn {
+            color: #006622;
+            background: rgba(0, 156, 59, 0.08);
+            border-color: rgba(0, 156, 59, 0.3);
+        }
+
+        .tab-btn.active {
+            background: #fedd00;
+            color: #005320;
+            box-shadow: 0 8px 25px rgba(254, 221, 0, 0.5);
+            font-weight: 800;
+            border: 2px solid #005320;
+        }
+
+        body.light-mode .tab-btn.active {
+            background: #009c3b;
+            color: #fff;
+            box-shadow: 0 8px 25px rgba(0, 156, 59, 0.5);
+            border-color: #fedd00;
+        }
+
+        .panel {
+            display: none;
+            animation: fadeSlide 0.4s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.3rem;
+            margin-top: 0.8rem;
+        }
+
+        .group-card {
+            background: linear-gradient(135deg, rgba(0, 83, 179, 0.25), rgba(0, 50, 20, 0.8));
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            padding: 1.2rem 0.8rem 1rem;
+            border: 2px solid rgba(254, 221, 0, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .group-card.brazil-group {
+            border: 3px solid #fedd00;
+            box-shadow: 0 12px 35px rgba(254, 221, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        body.light-mode .group-card {
+            background: linear-gradient(135deg, rgba(0, 156, 59, 0.1), rgba(255, 255, 255, 0.9));
+            border: 2px solid rgba(0, 156, 59, 0.3);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode .group-card.brazil-group {
+            border: 3px solid #009c3b;
+            box-shadow: 0 12px 35px rgba(0, 156, 59, 0.4);
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            border-color: #fedd00;
+        }
+
+        .group-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #fedd00;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(254, 221, 0, 0.3);
+            padding-bottom: 0.5rem;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode .group-title {
+            color: #006622;
+            border-bottom-color: rgba(0, 156, 59, 0.3);
+            text-shadow: none;
+        }
+
+        .team-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .team-item {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 83, 179, 0.2);
+            border-radius: 2rem;
+            padding: 0.5rem 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.9rem;
+            border: 1px solid rgba(254, 221, 0, 0.2);
+        }
+
+        .team-item.brazil-team {
+            background: rgba(254, 221, 0, 0.25);
+            border: 2px solid #fedd00;
+            font-weight: 800;
+            color: #fedd00;
+        }
+
+        body.light-mode .team-item {
+            background: rgba(0, 156, 59, 0.08);
+            color: #1a3a1a;
+            border: 1px solid rgba(0, 156, 59, 0.2);
+        }
+
+        body.light-mode .team-item.brazil-team {
+            background: rgba(0, 156, 59, 0.2);
+            border: 2px solid #009c3b;
+            color: #006622;
+        }
+
+        .games-count {
+            text-align: center;
+            margin-top: 0.6rem;
+            font-size: 0.75rem;
+            color: #fedd00;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.8rem;
+            border-radius: 1rem;
+        }
+
+        body.light-mode .games-count {
+            color: #006622;
+            background: rgba(0, 156, 59, 0.1);
+        }
+
+        .detail-container {
+            margin-top: 1rem;
+        }
+
+        .back-btn {
+            background: rgba(0, 83, 179, 0.3);
+            border: 2px solid rgba(254, 221, 0, 0.5);
+            color: #fedd00;
+            padding: 0.6rem 1.4rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: rgba(254, 221, 0, 0.2);
+            transform: translateX(-3px);
+        }
+
+        body.light-mode .back-btn {
+            background: rgba(0, 156, 59, 0.15);
+            border-color: #009c3b;
+            color: #006622;
+        }
+
+        .group-detail-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fedd00;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        body.light-mode .group-detail-title {
+            color: #006622;
+            text-shadow: none;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fedd00;
+            margin: 1.5rem 0 0.8rem 0;
+            padding-left: 1rem;
+            border-left: 5px solid #fedd00;
+        }
+
+        body.light-mode .section-title {
+            color: #006622;
+            border-left-color: #009c3b;
+        }
+
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, rgba(0, 83, 179, 0.2), rgba(0, 50, 20, 0.7));
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 2px solid rgba(254, 221, 0, 0.3);
+        }
+
+        body.light-mode .standings-table {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(0, 156, 59, 0.3);
+        }
+
+        .standings-table th,
+        .standings-table td {
+            padding: 0.8rem 0.5rem;
+            text-align: center;
+            color: #fff;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(254, 221, 0, 0.2);
+        }
+
+        body.light-mode .standings-table th,
+        body.light-mode .standings-table td {
+            color: #1a3a1a;
+            border-bottom: 1px solid rgba(0, 156, 59, 0.15);
+        }
+
+        .standings-table th {
+            background: rgba(254, 221, 0, 0.2);
+            font-weight: 800;
+            color: #fedd00;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        body.light-mode .standings-table th {
+            background: rgba(0, 156, 59, 0.2);
+            color: #006622;
+        }
+
+        .standings-table .team-cell {
+            text-align: left;
+            padding-left: 1rem;
+            font-weight: 700;
+        }
+
+        .highlight-row {
+            background: rgba(254, 221, 0, 0.15);
+        }
+        .third-place-row {
+            background: rgba(254, 221, 0, 0.08);
+        }
+
+        .match-edit-row {
+            background: linear-gradient(135deg, rgba(0, 83, 179, 0.25), rgba(0, 50, 20, 0.75));
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            padding: 0.9rem 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            border: 2px solid rgba(254, 221, 0, 0.2);
+            transition: all 0.3s;
+            color: #fff;
+        }
+
+        body.light-mode .match-edit-row {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(0, 156, 59, 0.2);
+            color: #1a3a1a;
+        }
+
+        .match-teams-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            min-width: 250px;
+        }
+
+        .score-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2rem;
+        }
+
+        body.light-mode .score-input-group {
+            background: rgba(0, 156, 59, 0.08);
+        }
+
+        .score-input {
+            width: 50px;
+            padding: 0.4rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(254, 221, 0, 0.5);
+            border-radius: 0.8rem;
+            color: #fedd00;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        body.light-mode .score-input {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #009c3b;
+            color: #006622;
+        }
+
+        .score-input:focus {
+            outline: none;
+            border-color: #fedd00;
+            box-shadow: 0 0 15px rgba(254, 221, 0, 0.5);
+        }
+
+        .score-separator {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fedd00;
+        }
+
+        body.light-mode .score-separator {
+            color: #009c3b;
+        }
+
+        .match-info-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .match-date {
+            background: rgba(0, 83, 179, 0.4);
+            padding: 0.25rem 0.8rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #fedd00;
+        }
+
+        body.light-mode .match-date {
+            background: rgba(0, 156, 59, 0.2);
+            color: #006622;
+        }
+
+        .match-time {
+            background: rgba(254, 221, 0, 0.3);
+            padding: 0.25rem 0.8rem;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #fff;
+        }
+
+        body.light-mode .match-time {
+            background: rgba(0, 156, 59, 0.2);
+            color: #006622;
+        }
+
+        .match-status {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 1rem;
+            font-weight: 700;
+        }
+
+        .status-pending {
+            background: rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        .status-played {
+            background: rgba(254, 221, 0, 0.3);
+            color: #fedd00;
+            border: 1px solid #fedd00;
+        }
+
+        .round-header {
+            font-weight: 700;
+            color: #fedd00;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            background: rgba(0, 83, 179, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            display: inline-block;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #fedd00;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+        }
+
+        .legend {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #fedd00;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .legend-dot.qualified {
+            background: #fedd00;
+        }
+        .legend-dot.third {
+            background: rgba(254, 221, 0, 0.4);
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 1.5rem 1rem; }
+            .match-edit-row { flex-direction: column; align-items: flex-start; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title-section">
+                <span class="trophy-icon">🏆</span>
+                <h1>Copa 2026</h1>
+                <span class="brazil-highlight">🇧🇷 Brasil no Grupo C</span>
+            </div>
+            <button id="themeToggle" class="theme-toggle">
+                <span id="themeIcon">🌙</span> <span id="themeText">Escuro</span>
+            </button>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="groups">🌍 Grupos (A-L)</button>
+            <button class="tab-btn" data-tab="all-matches">⚽ Todos os Jogos</button>
+        </div>
+
+        <div id="groupsPanel" class="panel active">
+            <div class="groups-grid" id="groupsContainer"></div>
+            <div id="groupDetailContainer" class="detail-container" style="display:none;"></div>
+        </div>
+
+        <div id="allMatchesPanel" class="panel">
+            <div id="allMatchesContainer"></div>
+        </div>
+
+        <div class="footer-note">
+            🇧🇷 Copa do Mundo FIFA 2026 • Canadá 🇨🇦 • México 🇲🇽 • EUA 🇺🇸 | 48 seleções • 12 grupos • 72 jogos
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Grupos oficiais
+            const groupsData = [
+                { name: "Grupo A", teams: ["🇲🇽 México", "🇿🇦 África do Sul", "🇰🇷 Coreia do Sul", "🇨🇿 República Tcheca"] },
+                { name: "Grupo B", teams: ["🇨🇦 Canadá", "🇧🇦 Bósnia e Herzegovina", "🇶🇦 Catar", "🇨🇭 Suíça"] },
+                { name: "Grupo C", teams: ["🇧🇷 Brasil", "🇲🇦 Marrocos", "🇭🇹 Haiti", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"] },
+                { name: "Grupo D", teams: ["🇺🇸 Estados Unidos", "🇵🇾 Paraguai", "🇦🇺 Austrália", "🇹🇷 Turquia"] },
+                { name: "Grupo E", teams: ["🇩🇪 Alemanha", "🇨🇼 Curaçao", "🇨🇮 Costa do Marfim", "🇪🇨 Equador"] },
+                { name: "Grupo F", teams: ["🇳🇱 Holanda", "🇯🇵 Japão", "🇸🇪 Suécia", "🇹🇳 Tunísia"] },
+                { name: "Grupo G", teams: ["🇧🇪 Bélgica", "🇪🇬 Egito", "🇮🇷 Irã", "🇳🇿 Nova Zelândia"] },
+                { name: "Grupo H", teams: ["🇪🇸 Espanha", "🇨🇻 Cabo Verde", "🇸🇦 Arábia Saudita", "🇺🇾 Uruguai"] },
+                { name: "Grupo I", teams: ["🇫🇷 França", "🇸🇳 Senegal", "🇮🇶 Iraque", "🇳🇴 Noruega"] },
+                { name: "Grupo J", teams: ["🇦🇷 Argentina", "🇩🇿 Argélia", "🇦🇹 Áustria", "🇯🇴 Jordânia"] },
+                { name: "Grupo K", teams: ["🇵🇹 Portugal", "🇨🇩 RD Congo", "🇺🇿 Uzbequistão", "🇨🇴 Colômbia"] },
+                { name: "Grupo L", teams: ["🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croácia", "🇬🇭 Gana", "🇵🇦 Panamá"] }
+            ];
+
+            // CONFRONTOS OFICIAIS COM DATA E HORÁRIO
+            const officialMatches = {
+                // Grupo A
+                "0-0-0": { date: "11/06", time: "16h", home: "🇲🇽 México", away: "🇿🇦 África do Sul" },
+                "0-0-1": { date: "11/06", time: "23h", home: "🇰🇷 Coreia do Sul", away: "🇨🇿 República Tcheca" },
+                "0-1-0": { date: "18/06", time: "13h", home: "🇨🇿 República Tcheca", away: "🇿🇦 África do Sul" },
+                "0-1-1": { date: "18/06", time: "22h", home: "🇲🇽 México", away: "🇰🇷 Coreia do Sul" },
+                "0-2-0": { date: "24/06", time: "22h", home: "🇨🇿 República Tcheca", away: "🇲🇽 México" },
+                "0-2-1": { date: "24/06", time: "22h", home: "🇿🇦 África do Sul", away: "🇰🇷 Coreia do Sul" },
+                // Grupo B
+                "1-0-0": { date: "12/06", time: "16h", home: "🇨🇦 Canadá", away: "🇧🇦 Bósnia e Herzegovina" },
+                "1-0-1": { date: "13/06", time: "16h", home: "🇶🇦 Catar", away: "🇨🇭 Suíça" },
+                "1-1-0": { date: "18/06", time: "16h", home: "🇨🇭 Suíça", away: "🇧🇦 Bósnia e Herzegovina" },
+                "1-1-1": { date: "18/06", time: "19h", home: "🇨🇦 Canadá", away: "🇶🇦 Catar" },
+                "1-2-0": { date: "24/06", time: "16h", home: "🇨🇭 Suíça", away: "🇨🇦 Canadá" },
+                "1-2-1": { date: "24/06", time: "16h", home: "🇧🇦 Bósnia e Herzegovina", away: "🇶🇦 Catar" },
+                // Grupo C (Brasil)
+                "2-0-0": { date: "13/06", time: "19h", home: "🇧🇷 Brasil", away: "🇲🇦 Marrocos" },
+                "2-0-1": { date: "13/06", time: "22h", home: "🇭🇹 Haiti", away: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia" },
+                "2-1-0": { date: "19/06", time: "19h", home: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia", away: "🇲🇦 Marrocos" },
+                "2-1-1": { date: "19/06", time: "22h", home: "🇧🇷 Brasil", away: "🇭🇹 Haiti" },
+                "2-2-0": { date: "24/06", time: "19h", home: "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia", away: "🇧🇷 Brasil" },
+                "2-2-1": { date: "24/06", time: "19h", home: "🇲🇦 Marrocos", away: "🇭🇹 Haiti" },
+                // Grupo D
+                "3-0-0": { date: "12/06", time: "22h", home: "🇺🇸 Estados Unidos", away: "🇵🇾 Paraguai" },
+                "3-0-1": { date: "13/06", time: "19h", home: "🇦🇺 Austrália", away: "🇹🇷 Turquia" },
+                "3-1-0": { date: "19/06", time: "16h", home: "🇵🇾 Paraguai", away: "🇦🇺 Austrália" },
+                "3-1-1": { date: "19/06", time: "22h", home: "🇺🇸 Estados Unidos", away: "🇹🇷 Turquia" },
+                "3-2-0": { date: "25/06", time: "19h", home: "🇵🇾 Paraguai", away: "🇺🇸 Estados Unidos" },
+                "3-2-1": { date: "25/06", time: "19h", home: "🇹🇷 Turquia", away: "🇦🇺 Austrália" },
+                // Grupo E
+                "4-0-0": { date: "14/06", time: "13h", home: "🇩🇪 Alemanha", away: "🇨🇼 Curaçao" },
+                "4-0-1": { date: "14/06", time: "19h", home: "🇨🇮 Costa do Marfim", away: "🇪🇨 Equador" },
+                "4-1-0": { date: "20/06", time: "16h", home: "🇪🇨 Equador", away: "🇩🇪 Alemanha" },
+                "4-1-1": { date: "20/06", time: "22h", home: "🇨🇼 Curaçao", away: "🇨🇮 Costa do Marfim" },
+                "4-2-0": { date: "26/06", time: "16h", home: "🇩🇪 Alemanha", away: "🇨🇮 Costa do Marfim" },
+                "4-2-1": { date: "26/06", time: "16h", home: "🇪🇨 Equador", away: "🇨🇼 Curaçao" },
+                // Grupo F
+                "5-0-0": { date: "14/06", time: "16h", home: "🇳🇱 Holanda", away: "🇯🇵 Japão" },
+                "5-0-1": { date: "14/06", time: "22h", home: "🇸🇪 Suécia", away: "🇹🇳 Tunísia" },
+                "5-1-0": { date: "20/06", time: "19h", home: "🇯🇵 Japão", away: "🇸🇪 Suécia" },
+                "5-1-1": { date: "20/06", time: "22h", home: "🇳🇱 Holanda", away: "🇹🇳 Tunísia" },
+                "5-2-0": { date: "26/06", time: "19h", home: "🇯🇵 Japão", away: "🇹🇳 Tunísia" },
+                "5-2-1": { date: "26/06", time: "19h", home: "🇳🇱 Holanda", away: "🇸🇪 Suécia" },
+                // Grupo G
+                "6-0-0": { date: "15/06", time: "13h", home: "🇧🇪 Bélgica", away: "🇪🇬 Egito" },
+                "6-0-1": { date: "15/06", time: "19h", home: "🇮🇷 Irã", away: "🇳🇿 Nova Zelândia" },
+                "6-1-0": { date: "21/06", time: "16h", home: "🇪🇬 Egito", away: "🇮🇷 Irã" },
+                "6-1-1": { date: "21/06", time: "22h", home: "🇧🇪 Bélgica", away: "🇳🇿 Nova Zelândia" },
+                "6-2-0": { date: "27/06", time: "16h", home: "🇧🇪 Bélgica", away: "🇮🇷 Irã" },
+                "6-2-1": { date: "27/06", time: "16h", home: "🇪🇬 Egito", away: "🇳🇿 Nova Zelândia" },
+                // Grupo H
+                "7-0-0": { date: "15/06", time: "16h", home: "🇪🇸 Espanha", away: "🇨🇻 Cabo Verde" },
+                "7-0-1": { date: "15/06", time: "22h", home: "🇸🇦 Arábia Saudita", away: "🇺🇾 Uruguai" },
+                "7-1-0": { date: "21/06", time: "19h", home: "🇨🇻 Cabo Verde", away: "🇸🇦 Arábia Saudita" },
+                "7-1-1": { date: "21/06", time: "22h", home: "🇪🇸 Espanha", away: "🇺🇾 Uruguai" },
+                "7-2-0": { date: "27/06", time: "19h", home: "🇪🇸 Espanha", away: "🇸🇦 Arábia Saudita" },
+                "7-2-1": { date: "27/06", time: "19h", home: "🇨🇻 Cabo Verde", away: "🇺🇾 Uruguai" },
+                // Grupo I
+                "8-0-0": { date: "16/06", time: "13h", home: "🇫🇷 França", away: "🇸🇳 Senegal" },
+                "8-0-1": { date: "16/06", time: "19h", home: "🇮🇶 Iraque", away: "🇳🇴 Noruega" },
+                "8-1-0": { date: "22/06", time: "16h", home: "🇸🇳 Senegal", away: "🇮🇶 Iraque" },
+                "8-1-1": { date: "22/06", time: "22h", home: "🇫🇷 França", away: "🇳🇴 Noruega" },
+                "8-2-0": { date: "27/06", time: "22h", home: "🇫🇷 França", away: "🇮🇶 Iraque" },
+                "8-2-1": { date: "27/06", time: "22h", home: "🇸🇳 Senegal", away: "🇳🇴 Noruega" },
+                // Grupo J
+                "9-0-0": { date: "16/06", time: "16h", home: "🇦🇷 Argentina", away: "🇩🇿 Argélia" },
+                "9-0-1": { date: "16/06", time: "22h", home: "🇦🇹 Áustria", away: "🇯🇴 Jordânia" },
+                "9-1-0": { date: "22/06", time: "19h", home: "🇩🇿 Argélia", away: "🇦🇹 Áustria" },
+                "9-1-1": { date: "22/06", time: "22h", home: "🇦🇷 Argentina", away: "🇯🇴 Jordânia" },
+                "9-2-0": { date: "27/06", time: "13h", home: "🇦🇷 Argentina", away: "🇦🇹 Áustria" },
+                "9-2-1": { date: "27/06", time: "13h", home: "🇩🇿 Argélia", away: "🇯🇴 Jordânia" },
+                // Grupo K
+                "10-0-0": { date: "17/06", time: "13h", home: "🇵🇹 Portugal", away: "🇨🇩 RD Congo" },
+                "10-0-1": { date: "17/06", time: "19h", home: "🇺🇿 Uzbequistão", away: "🇨🇴 Colômbia" },
+                "10-1-0": { date: "23/06", time: "16h", home: "🇨🇩 RD Congo", away: "🇺🇿 Uzbequistão" },
+                "10-1-1": { date: "23/06", time: "22h", home: "🇵🇹 Portugal", away: "🇨🇴 Colômbia" },
+                "10-2-0": { date: "27/06", time: "16h", home: "🇵🇹 Portugal", away: "🇺🇿 Uzbequistão" },
+                "10-2-1": { date: "27/06", time: "16h", home: "🇨🇩 RD Congo", away: "🇨🇴 Colômbia" },
+                // Grupo L
+                "11-0-0": { date: "17/06", time: "16h", home: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", away: "🇭🇷 Croácia" },
+                "11-0-1": { date: "17/06", time: "22h", home: "🇬🇭 Gana", away: "🇵🇦 Panamá" },
+                "11-1-0": { date: "23/06", time: "19h", home: "🇭🇷 Croácia", away: "🇬🇭 Gana" },
+                "11-1-1": { date: "23/06", time: "22h", home: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", away: "🇵🇦 Panamá" },
+                "11-2-0": { date: "27/06", time: "19h", home: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", away: "🇬🇭 Gana" },
+                "11-2-1": { date: "27/06", time: "19h", home: "🇭🇷 Croácia", away: "🇵🇦 Panamá" }
+            };
+
+            const scores = {};
+
+            function getMatchDetails(gi, ri, mi) {
+                const key = `${gi}-${ri}-${mi}`;
+                return officialMatches[key] || { date: "A definir", time: "--", home: "???", away: "???" };
+            }
+
+            function getScore(gi, ri, mi) {
+                return scores[`${gi}-${ri}-${mi}`] || null;
+            }
+
+            function setScore(gi, ri, mi, home, away) {
+                const key = `${gi}-${ri}-${mi}`;
+                if (home === '' && away === '') delete scores[key];
+                else scores[key] = { home: home !== '' ? parseInt(home) : null, away: away !== '' ? parseInt(away) : null };
+            }
+
+            function isScoreComplete(s) {
+                return s && s.home !== null && s.away !== null && !isNaN(s.home) && !isNaN(s.away);
+            }
+
+            function calculateStandings(gi) {
+                const group = groupsData[gi];
+                const stats = {};
+                group.teams.forEach(t => stats[t] = { pts: 0, j: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0, sg: 0 });
+                for (let ri = 0; ri < 3; ri++) {
+                    for (let mi = 0; mi < 2; mi++) {
+                        const sc = getScore(gi, ri, mi);
+                        if (!isScoreComplete(sc)) continue;
+                        const det = getMatchDetails(gi, ri, mi);
+                        const ht = det.home,
+                            at = det.away;
+                        if (!stats[ht] || !stats[at]) continue;
+                        stats[ht].j++;
+                        stats[at].j++;
+                        stats[ht].gp += sc.home;
+                        stats[ht].gc += sc.away;
+                        stats[at].gp += sc.away;
+                        stats[at].gc += sc.home;
+                        if (sc.home > sc.away) { stats[ht].pts += 3;
+                            stats[ht].v++;
+                            stats[at].d++; } else if (sc.home < sc.away) { stats[at].pts += 3;
+                            stats[at].v++;
+                            stats[ht].d++; } else { stats[ht].pts += 1;
+                            stats[at].pts += 1;
+                            stats[ht].e++;
+                            stats[at].e++; }
+                    }
+                }
+                group.teams.forEach(t => stats[t].sg = stats[t].gp - stats[t].gc);
+                const sorted = [...group.teams].sort((a, b) => stats[b].pts - stats[a].pts || stats[b].sg - stats[a].sg || stats[b].gp - stats[a].gp);
+                return { sorted, stats };
+            }
+
+            function countPlayed(gi) {
+                let c = 0;
+                for (let ri = 0; ri < 3; ri++)
+                    for (let mi = 0; mi < 2; mi++)
+                        if (isScoreComplete(getScore(gi, ri, mi))) c++;
+                return c;
+            }
+
+            const gc = document.getElementById('groupsContainer');
+            const gdc = document.getElementById('groupDetailContainer');
+            const amc = document.getElementById('allMatchesContainer');
+            const tbs = document.querySelectorAll('.tab-btn');
+            const gp = document.getElementById('groupsPanel');
+            const amp = document.getElementById('allMatchesPanel');
+            const body = document.body;
+
+            function renderGroups() {
+                gc.innerHTML = groupsData.map((g, i) => {
+                    const pc = countPlayed(i);
+                    const isBrazil = g.name === "Grupo C";
+                    return `<div class="group-card${isBrazil?' brazil-group':''}" data-group-index="${i}">
+                <div class="group-title">${g.name}${isBrazil?' 🇧🇷':''}</div>
+                <ul class="team-list">${g.teams.map(t=>`<li class="team-item${t.includes('Brasil')?' brazil-team':''}"><span>${t}</span></li>`).join('')}</ul>
+                <div class="games-count">${pc}/6 jogos</div></div>`;
+                }).join('');
+                document.querySelectorAll('.group-card').forEach(c => c.addEventListener('click', function() { showGroupDetail(parseInt(this.dataset.groupIndex)); }));
+            }
+
+            function showGroupDetail(gi) {
+                const group = groupsData[gi];
+                const { sorted, stats } = calculateStandings(gi);
+                const pc = countPlayed(gi);
+                let html = `<button class="back-btn" onclick="window.backToGroups()">← Voltar</button>
+            <div class="group-detail-title">${group.name}</div>
+            <div class="section-title">📊 Classificação ${pc>0?`(${pc}/6 jogos)`:''}</div>
+            <div style="overflow-x:auto;"><table class="standings-table"><thead><tr><th>Pos</th><th>Seleção</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th></tr></thead><tbody>`;
+                if (pc === 0) html += '<tr><td colspan="10" style="text-align:center;padding:2rem;color:#aaa;">⚽ Preencha os placares abaixo.</td></tr>';
+                else sorted.forEach((t, idx) => { const s = stats[t];
+                    html += `<tr class="${idx<2?'highlight-row':idx===2?'third-place-row':''}"><td>${idx+1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg>0?'+'+s.sg:s.sg}</td></tr>`; });
+                html += `</tbody></table></div><div class="legend"><span><span class="legend-dot qualified"></span> Classificados</span><span><span class="legend-dot third"></span> 3º lugar</span></div><div class="section-title">⚽ Confrontos</div>`;
+                for (let ri = 0; ri < 3; ri++) {
+                    html += `<div class="round-header">Rodada ${ri+1}</div>`;
+                    for (let mi = 0; mi < 2; mi++) {
+                        const det = getMatchDetails(gi, ri, mi);
+                        const sc = getScore(gi, ri, mi);
+                        const played = isScoreComplete(sc);
+                        html += `<div class="match-edit-row">
+                  <div class="match-teams-display"><span>${det.home}</span> vs <span>${det.away}</span><span class="match-status ${played?'status-played':'status-pending'}">${played?'✓':'Pendente'}</span></div>
+                  <div class="score-input-group">
+                    <input type="number" class="score-input home-score" value="${sc&&sc.home!==null?sc.home:''}" min="0" max="20" placeholder="-" data-group="${gi}" data-round="${ri}" data-match="${mi}" data-side="home">
+                    <span class="score-separator">×</span>
+                    <input type="number" class="score-input away-score" value="${sc&&sc.away!==null?sc.away:''}" min="0" max="20" placeholder="-" data-group="${gi}" data-round="${ri}" data-match="${mi}" data-side="away">
+                  </div>
+                  <div class="match-info-group"><span class="match-date">📅 ${det.date}</span><span class="match-time">🕐 ${det.time}</span></div>
+                </div>`;
+                    }
+                }
+                html += '<div style="text-align:center;margin-top:0.8rem;color:#fedd00;font-style:italic;">✏️ Edite os placares. Classificação automática.</div>';
+                gdc.innerHTML = html;
+                gdc.style.display = 'block';
+                gc.style.display = 'none';
+                document.querySelectorAll('.score-input').forEach(inp => { inp.removeEventListener('input', handler);
+                    inp.addEventListener('input', handler); });
+            }
+
+            window.backToGroups = function() { gdc.style.display = 'none';
+                gc.style.display = '';
+                renderGroups(); };
+
+            function handler() {
+                const gi = parseInt(this.dataset.group),
+                    ri = parseInt(this.dataset.round),
+                    mi = parseInt(this.dataset.match);
+                const row = this.closest('.match-edit-row');
+                setScore(gi, ri, mi, row.querySelector('.home-score').value.trim(), row.querySelector('.away-score').value.trim());
+                const sc = getScore(gi, ri, mi);
+                const badge = row.querySelector('.match-status');
+                if (isScoreComplete(sc)) { badge.textContent = '✓';
+                    badge.className = 'match-status status-played'; } else { badge.textContent = 'Pendente';
+                    badge.className = 'match-status status-pending'; }
+                updateStandings(gi);
+            }
+
+            function updateStandings(gi) {
+                const { sorted, stats } = calculateStandings(gi);
+                const pc = countPlayed(gi);
+                const tb = document.querySelector('.standings-table tbody');
+                if (!tb) return;
+                const st = document.querySelector('.section-title');
+                if (st) st.textContent = `📊 Classificação ${pc>0?`(${pc}/6 jogos)`:''}`;
+                if (pc === 0) { tb.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:2rem;color:#aaa;">⚽ Preencha os placares abaixo.</td></tr>'; return; }
+                tb.innerHTML = sorted.map((t, idx) => { const s = stats[t]; return `<tr class="${idx<2?'highlight-row':idx===2?'third-place-row':''}"><td>${idx+1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg>0?'+'+s.sg:s.sg}</td></tr>`; }).join('');
+            }
+
+            function renderAllMatches() {
+                amc.innerHTML = groupsData.map((g, gi) => {
+                    const pc = countPlayed(gi);
+                    let h = `<div class="group-detail-title" style="font-size:1.4rem;">${g.name} (${pc}/6)</div>`;
+                    for (let ri = 0; ri < 3; ri++) {
+                        h += `<div class="round-header">Rodada ${ri+1}</div>`;
+                        for (let mi = 0; mi < 2; mi++) {
+                            const det = getMatchDetails(gi, ri, mi);
+                            const sc = getScore(gi, ri, mi);
+                            const played = isScoreComplete(sc);
+                            h += `<div class="match-edit-row"><div class="match-teams-display"><span>${det.home}</span> vs <span>${det.away}</span><span class="match-status ${played?'status-played':'status-pending'}">${played?'✓':'Pendente'}</span></div><div class="score-input-group"><span class="score-separator">${played?sc.home+' × '+sc.away:'- × -'}</span></div><div class="match-info-group"><span class="match-date">📅 ${det.date}</span><span class="match-time">🕐 ${det.time}</span></div></div>`;
+                        }
+                    }
+                    return h;
+                }).join('');
+            }
+
+            function switchTab(id) {
+                tbs.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+                if (id === 'groups') { gp.classList.add('active');
+                    amp.classList.remove('active'); if (gdc.style.display === 'block') window.backToGroups(); } else { amp.classList.add('active');
+                    gp.classList.remove('active');
+                    renderAllMatches(); }
+            }
+            tbs.forEach(b => b.addEventListener('click', e => switchTab(e.currentTarget.dataset.tab)));
+
+            function setTheme(m) {
+                if (m === 'light') { body.classList.add('light-mode');
+                    document.getElementById('themeIcon').textContent = '☀️';
+                    document.getElementById('themeText').textContent = 'Claro';
+                    localStorage.setItem('copa2026theme', 'light'); } else { body.classList.remove('light-mode');
+                    document.getElementById('themeIcon').textContent = '🌙';
+                    document.getElementById('themeText').textContent = 'Escuro';
+                    localStorage.setItem('copa2026theme', 'dark'); }
+            }
+            document.getElementById('themeToggle').addEventListener('click', () => setTheme(body.classList.contains('light-mode') ? 'dark' : 'light'));
+            document.addEventListener('keydown', function(e) { if (e.target.classList.contains('score-input')) { const allowed = [8, 46, 9, 27, 13, 37, 38, 39, 40]; if (allowed.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) return;
+                    e.preventDefault(); } });
+
+            function init() { renderGroups();
+                renderAllMatches();
+                setTheme(localStorage.getItem('copa2026theme') === 'light' ? 'light' : 'dark');
+                switchTab('groups'); }
+            window.addEventListener('DOMContentLoaded', init);
+        })();
+    </script>
+</body>
+</html>
