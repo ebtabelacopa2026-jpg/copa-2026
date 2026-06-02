@@ -86,8 +86,37 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(254, 221, 0, 0.4); }
-            50% { box-shadow: 0 0 25px rgba(254, 221, 0, 0.7); }
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(254, 221, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(254, 221, 0, 0.7);
+            }
+        }
+
+        .save-indicator {
+            color: #00ff55;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(0, 255, 100, 0.15);
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .save-indicator.show {
+            display: flex;
+            animation: fadeInOut 2s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         .theme-btn {
@@ -164,11 +193,6 @@
             pointer-events: none;
         }
 
-        .tab-btn.locked:hover {
-            background: rgba(0, 83, 179, 0.2);
-            color: #fedd00;
-        }
-
         .panel {
             display: none;
             animation: fadeIn 0.35s ease;
@@ -179,8 +203,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .groups-grid {
@@ -262,9 +292,18 @@
             text-align: center;
         }
 
-        .pos-1 { background: #00ff55; color: #003d10; }
-        .pos-2 { background: #00cc44; color: #003d10; }
-        .pos-3 { background: rgba(254, 221, 0, 0.5); color: #fedd00; }
+        .pos-1 {
+            background: #00ff55;
+            color: #003d10;
+        }
+        .pos-2 {
+            background: #00cc44;
+            color: #003d10;
+        }
+        .pos-3 {
+            background: rgba(254, 221, 0, 0.5);
+            color: #fedd00;
+        }
 
         .games-count {
             text-align: center;
@@ -323,7 +362,8 @@
             margin-bottom: 1rem;
         }
 
-        th, td {
+        th,
+        td {
             padding: 0.5rem 0.3rem;
             text-align: center;
             color: #fff;
@@ -399,7 +439,7 @@
         }
 
         .score-input {
-            width: 40px;
+            width: 45px;
             padding: 0.25rem;
             text-align: center;
             background: rgba(255, 255, 255, 0.15);
@@ -439,24 +479,20 @@
             background: rgba(0, 83, 179, 0.5);
             color: #fedd00;
         }
-
         .badge-time {
             background: rgba(254, 221, 0, 0.3);
             color: #fff;
         }
-
         .badge-status {
             font-size: 0.65rem;
             padding: 0.1rem 0.5rem;
             border-radius: 1rem;
             font-weight: 700;
         }
-
         .badge-pending {
             background: rgba(255, 255, 255, 0.1);
             color: #aaa;
         }
-
         .badge-done {
             background: rgba(0, 255, 100, 0.3);
             color: #00ff55;
@@ -496,7 +532,6 @@
             font-size: 0.85rem;
             min-width: 130px;
         }
-
         .bracket-team.winner {
             color: #00ff55;
         }
@@ -540,10 +575,20 @@
         }
 
         @media (max-width: 700px) {
-            .container { padding: 1rem 0.7rem; }
-            .match-row { flex-direction: column; align-items: flex-start; }
-            h1 { font-size: 1.4rem; }
-            .tab-btn { font-size: 0.7rem; padding: 0.4rem 0.6rem; }
+            .container {
+                padding: 1rem 0.7rem;
+            }
+            .match-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            .tab-btn {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.6rem;
+            }
         }
     </style>
 </head>
@@ -554,6 +599,7 @@
                 <span style="font-size:2rem;">🏆</span>
                 <h1>Copa 2026</h1>
                 <span class="brazil-badge">🇧🇷 Brasil Grupo C</span>
+                <span class="save-indicator" id="saveIndicator">💾 Salvo!</span>
             </div>
             <button id="themeToggle" class="theme-btn">
                 <span id="themeIcon">🌙</span> <span id="themeText">Escuro</span>
@@ -584,7 +630,7 @@
         <div id="panelSF" class="panel"><div id="sfContent"></div></div>
         <div id="panelFinal" class="panel"><div id="finalContent"></div></div>
 
-        <div class="footer-note">🇧🇷 Copa 2026 • 48 seleções • 12 grupos • 32 classificados • 8 jogos → 🏆</div>
+        <div class="footer-note">🇧🇷 Copa 2026 • 48 seleções • 12 grupos • 32 classificados • 8 jogos → 🏆 • Dados salvos automaticamente</div>
     </div>
 
     <script>
@@ -605,47 +651,81 @@
                 ["Grupo L", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croácia", "🇬🇭 Gana", "🇵🇦 Panamá"]
             ];
 
-            // Dados oficiais: [data, hora, time_casa, time_visitante]
             const rawMatches = [
-                ["11/06","16h","🇲🇽 México","🇿🇦 África do Sul"],["11/06","23h","🇰🇷 Coreia do Sul","🇨🇿 República Tcheca"],
-                ["18/06","13h","🇨🇿 República Tcheca","🇿🇦 África do Sul"],["18/06","22h","🇲🇽 México","🇰🇷 Coreia do Sul"],
-                ["24/06","22h","🇨🇿 República Tcheca","🇲🇽 México"],["24/06","22h","🇿🇦 África do Sul","🇰🇷 Coreia do Sul"],
-                ["12/06","16h","🇨🇦 Canadá","🇧🇦 Bósnia e Herzegovina"],["13/06","16h","🇶🇦 Catar","🇨🇭 Suíça"],
-                ["18/06","16h","🇨🇭 Suíça","🇧🇦 Bósnia e Herzegovina"],["18/06","19h","🇨🇦 Canadá","🇶🇦 Catar"],
-                ["24/06","16h","🇨🇭 Suíça","🇨🇦 Canadá"],["24/06","16h","🇧🇦 Bósnia e Herzegovina","🇶🇦 Catar"],
-                ["13/06","19h","🇧🇷 Brasil","🇲🇦 Marrocos"],["13/06","22h","🇭🇹 Haiti","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],
-                ["19/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇲🇦 Marrocos"],["19/06","22h","🇧🇷 Brasil","🇭🇹 Haiti"],
-                ["24/06","19h","🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia","🇧🇷 Brasil"],["24/06","19h","🇲🇦 Marrocos","🇭🇹 Haiti"],
-                ["12/06","22h","🇺🇸 Estados Unidos","🇵🇾 Paraguai"],["13/06","19h","🇦🇺 Austrália","🇹🇷 Turquia"],
-                ["19/06","16h","🇵🇾 Paraguai","🇦🇺 Austrália"],["19/06","22h","🇺🇸 Estados Unidos","🇹🇷 Turquia"],
-                ["25/06","19h","🇵🇾 Paraguai","🇺🇸 Estados Unidos"],["25/06","19h","🇹🇷 Turquia","🇦🇺 Austrália"],
-                ["14/06","13h","🇩🇪 Alemanha","🇨🇼 Curaçao"],["14/06","19h","🇨🇮 Costa do Marfim","🇪🇨 Equador"],
-                ["20/06","16h","🇪🇨 Equador","🇩🇪 Alemanha"],["20/06","22h","🇨🇼 Curaçao","🇨🇮 Costa do Marfim"],
-                ["26/06","16h","🇩🇪 Alemanha","🇨🇮 Costa do Marfim"],["26/06","16h","🇪🇨 Equador","🇨🇼 Curaçao"],
-                ["14/06","16h","🇳🇱 Holanda","🇯🇵 Japão"],["14/06","22h","🇸🇪 Suécia","🇹🇳 Tunísia"],
-                ["20/06","19h","🇯🇵 Japão","🇸🇪 Suécia"],["20/06","22h","🇳🇱 Holanda","🇹🇳 Tunísia"],
-                ["26/06","19h","🇯🇵 Japão","🇹🇳 Tunísia"],["26/06","19h","🇳🇱 Holanda","🇸🇪 Suécia"],
-                ["15/06","13h","🇧🇪 Bélgica","🇪🇬 Egito"],["15/06","19h","🇮🇷 Irã","🇳🇿 Nova Zelândia"],
-                ["21/06","16h","🇪🇬 Egito","🇮🇷 Irã"],["21/06","22h","🇧🇪 Bélgica","🇳🇿 Nova Zelândia"],
-                ["27/06","16h","🇧🇪 Bélgica","🇮🇷 Irã"],["27/06","16h","🇪🇬 Egito","🇳🇿 Nova Zelândia"],
-                ["15/06","16h","🇪🇸 Espanha","🇨🇻 Cabo Verde"],["15/06","22h","🇸🇦 Arábia Saudita","🇺🇾 Uruguai"],
-                ["21/06","19h","🇨🇻 Cabo Verde","🇸🇦 Arábia Saudita"],["21/06","22h","🇪🇸 Espanha","🇺🇾 Uruguai"],
-                ["27/06","19h","🇪🇸 Espanha","🇸🇦 Arábia Saudita"],["27/06","19h","🇨🇻 Cabo Verde","🇺🇾 Uruguai"],
-                ["16/06","13h","🇫🇷 França","🇸🇳 Senegal"],["16/06","19h","🇮🇶 Iraque","🇳🇴 Noruega"],
-                ["22/06","16h","🇸🇳 Senegal","🇮🇶 Iraque"],["22/06","22h","🇫🇷 França","🇳🇴 Noruega"],
-                ["27/06","22h","🇫🇷 França","🇮🇶 Iraque"],["27/06","22h","🇸🇳 Senegal","🇳🇴 Noruega"],
-                ["16/06","16h","🇦🇷 Argentina","🇩🇿 Argélia"],["16/06","22h","🇦🇹 Áustria","🇯🇴 Jordânia"],
-                ["22/06","19h","🇩🇿 Argélia","🇦🇹 Áustria"],["22/06","22h","🇦🇷 Argentina","🇯🇴 Jordânia"],
-                ["27/06","13h","🇦🇷 Argentina","🇦🇹 Áustria"],["27/06","13h","🇩🇿 Argélia","🇯🇴 Jordânia"],
-                ["17/06","13h","🇵🇹 Portugal","🇨🇩 RD Congo"],["17/06","19h","🇺🇿 Uzbequistão","🇨🇴 Colômbia"],
-                ["23/06","16h","🇨🇩 RD Congo","🇺🇿 Uzbequistão"],["23/06","22h","🇵🇹 Portugal","🇨🇴 Colômbia"],
-                ["27/06","16h","🇵🇹 Portugal","🇺🇿 Uzbequistão"],["27/06","16h","🇨🇩 RD Congo","🇨🇴 Colômbia"],
-                ["17/06","16h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇭🇷 Croácia"],["17/06","22h","🇬🇭 Gana","🇵🇦 Panamá"],
-                ["23/06","19h","🇭🇷 Croácia","🇬🇭 Gana"],["23/06","22h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇵🇦 Panamá"],
-                ["27/06","19h","🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra","🇬🇭 Gana"],["27/06","19h","🇭🇷 Croácia","🇵🇦 Panamá"]
+                ["11/06", "16h", "🇲🇽 México", "🇿🇦 África do Sul"],
+                ["11/06", "23h", "🇰🇷 Coreia do Sul", "🇨🇿 República Tcheca"],
+                ["18/06", "13h", "🇨🇿 República Tcheca", "🇿🇦 África do Sul"],
+                ["18/06", "22h", "🇲🇽 México", "🇰🇷 Coreia do Sul"],
+                ["24/06", "22h", "🇨🇿 República Tcheca", "🇲🇽 México"],
+                ["24/06", "22h", "🇿🇦 África do Sul", "🇰🇷 Coreia do Sul"],
+                ["12/06", "16h", "🇨🇦 Canadá", "🇧🇦 Bósnia e Herzegovina"],
+                ["13/06", "16h", "🇶🇦 Catar", "🇨🇭 Suíça"],
+                ["18/06", "16h", "🇨🇭 Suíça", "🇧🇦 Bósnia e Herzegovina"],
+                ["18/06", "19h", "🇨🇦 Canadá", "🇶🇦 Catar"],
+                ["24/06", "16h", "🇨🇭 Suíça", "🇨🇦 Canadá"],
+                ["24/06", "16h", "🇧🇦 Bósnia e Herzegovina", "🇶🇦 Catar"],
+                ["13/06", "19h", "🇧🇷 Brasil", "🇲🇦 Marrocos"],
+                ["13/06", "22h", "🇭🇹 Haiti", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia"],
+                ["19/06", "19h", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia", "🇲🇦 Marrocos"],
+                ["19/06", "22h", "🇧🇷 Brasil", "🇭🇹 Haiti"],
+                ["24/06", "19h", "🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia", "🇧🇷 Brasil"],
+                ["24/06", "19h", "🇲🇦 Marrocos", "🇭🇹 Haiti"],
+                ["12/06", "22h", "🇺🇸 Estados Unidos", "🇵🇾 Paraguai"],
+                ["13/06", "19h", "🇦🇺 Austrália", "🇹🇷 Turquia"],
+                ["19/06", "16h", "🇵🇾 Paraguai", "🇦🇺 Austrália"],
+                ["19/06", "22h", "🇺🇸 Estados Unidos", "🇹🇷 Turquia"],
+                ["25/06", "19h", "🇵🇾 Paraguai", "🇺🇸 Estados Unidos"],
+                ["25/06", "19h", "🇹🇷 Turquia", "🇦🇺 Austrália"],
+                ["14/06", "13h", "🇩🇪 Alemanha", "🇨🇼 Curaçao"],
+                ["14/06", "19h", "🇨🇮 Costa do Marfim", "🇪🇨 Equador"],
+                ["20/06", "16h", "🇪🇨 Equador", "🇩🇪 Alemanha"],
+                ["20/06", "22h", "🇨🇼 Curaçao", "🇨🇮 Costa do Marfim"],
+                ["26/06", "16h", "🇩🇪 Alemanha", "🇨🇮 Costa do Marfim"],
+                ["26/06", "16h", "🇪🇨 Equador", "🇨🇼 Curaçao"],
+                ["14/06", "16h", "🇳🇱 Holanda", "🇯🇵 Japão"],
+                ["14/06", "22h", "🇸🇪 Suécia", "🇹🇳 Tunísia"],
+                ["20/06", "19h", "🇯🇵 Japão", "🇸🇪 Suécia"],
+                ["20/06", "22h", "🇳🇱 Holanda", "🇹🇳 Tunísia"],
+                ["26/06", "19h", "🇯🇵 Japão", "🇹🇳 Tunísia"],
+                ["26/06", "19h", "🇳🇱 Holanda", "🇸🇪 Suécia"],
+                ["15/06", "13h", "🇧🇪 Bélgica", "🇪🇬 Egito"],
+                ["15/06", "19h", "🇮🇷 Irã", "🇳🇿 Nova Zelândia"],
+                ["21/06", "16h", "🇪🇬 Egito", "🇮🇷 Irã"],
+                ["21/06", "22h", "🇧🇪 Bélgica", "🇳🇿 Nova Zelândia"],
+                ["27/06", "16h", "🇧🇪 Bélgica", "🇮🇷 Irã"],
+                ["27/06", "16h", "🇪🇬 Egito", "🇳🇿 Nova Zelândia"],
+                ["15/06", "16h", "🇪🇸 Espanha", "🇨🇻 Cabo Verde"],
+                ["15/06", "22h", "🇸🇦 Arábia Saudita", "🇺🇾 Uruguai"],
+                ["21/06", "19h", "🇨🇻 Cabo Verde", "🇸🇦 Arábia Saudita"],
+                ["21/06", "22h", "🇪🇸 Espanha", "🇺🇾 Uruguai"],
+                ["27/06", "19h", "🇪🇸 Espanha", "🇸🇦 Arábia Saudita"],
+                ["27/06", "19h", "🇨🇻 Cabo Verde", "🇺🇾 Uruguai"],
+                ["16/06", "13h", "🇫🇷 França", "🇸🇳 Senegal"],
+                ["16/06", "19h", "🇮🇶 Iraque", "🇳🇴 Noruega"],
+                ["22/06", "16h", "🇸🇳 Senegal", "🇮🇶 Iraque"],
+                ["22/06", "22h", "🇫🇷 França", "🇳🇴 Noruega"],
+                ["27/06", "22h", "🇫🇷 França", "🇮🇶 Iraque"],
+                ["27/06", "22h", "🇸🇳 Senegal", "🇳🇴 Noruega"],
+                ["16/06", "16h", "🇦🇷 Argentina", "🇩🇿 Argélia"],
+                ["16/06", "22h", "🇦🇹 Áustria", "🇯🇴 Jordânia"],
+                ["22/06", "19h", "🇩🇿 Argélia", "🇦🇹 Áustria"],
+                ["22/06", "22h", "🇦🇷 Argentina", "🇯🇴 Jordânia"],
+                ["27/06", "13h", "🇦🇷 Argentina", "🇦🇹 Áustria"],
+                ["27/06", "13h", "🇩🇿 Argélia", "🇯🇴 Jordânia"],
+                ["17/06", "13h", "🇵🇹 Portugal", "🇨🇩 RD Congo"],
+                ["17/06", "19h", "🇺🇿 Uzbequistão", "🇨🇴 Colômbia"],
+                ["23/06", "16h", "🇨🇩 RD Congo", "🇺🇿 Uzbequistão"],
+                ["23/06", "22h", "🇵🇹 Portugal", "🇨🇴 Colômbia"],
+                ["27/06", "16h", "🇵🇹 Portugal", "🇺🇿 Uzbequistão"],
+                ["27/06", "16h", "🇨🇩 RD Congo", "🇨🇴 Colômbia"],
+                ["17/06", "16h", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇭🇷 Croácia"],
+                ["17/06", "22h", "🇬🇭 Gana", "🇵🇦 Panamá"],
+                ["23/06", "19h", "🇭🇷 Croácia", "🇬🇭 Gana"],
+                ["23/06", "22h", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇵🇦 Panamá"],
+                ["27/06", "19h", "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra", "🇬🇭 Gana"],
+                ["27/06", "19h", "🇭🇷 Croácia", "🇵🇦 Panamá"]
             ];
 
-            // Mapear para chave "grupo-round-match"
             const matchDetails = {};
             for (let g = 0; g < 12; g++) {
                 for (let r = 0; r < 3; r++) {
@@ -661,23 +741,61 @@
                 }
             }
 
-            // Placar dos grupos: chave "g-r-m" -> {home, away}
-            const groupScores = {};
-            // Placar do mata-mata: chave "fase-match" -> {home, away}
-            const koScores = {};
+            // ============ GERENCIAMENTO DE DADOS COM LOCALSTORAGE ============
+            const STORAGE_KEY_GROUPS = 'copa2026_groupScores';
+            const STORAGE_KEY_KO = 'copa2026_koScores';
+
+            function loadFromStorage() {
+                try {
+                    const gs = localStorage.getItem(STORAGE_KEY_GROUPS);
+                    if (gs) return JSON.parse(gs);
+                } catch (e) {}
+                return {};
+            }
+
+            function saveToStorage() {
+                try {
+                    localStorage.setItem(STORAGE_KEY_GROUPS, JSON.stringify(groupScores));
+                    localStorage.setItem(STORAGE_KEY_KO, JSON.stringify(koScores));
+                    showSaveIndicator();
+                } catch (e) {
+                    console.warn('Não foi possível salvar os dados.');
+                }
+            }
+
+            function showSaveIndicator() {
+                const indicator = document.getElementById('saveIndicator');
+                indicator.classList.remove('show');
+                void indicator.offsetWidth;
+                indicator.classList.add('show');
+                setTimeout(() => indicator.classList.remove('show'), 2200);
+            }
+
+            const groupScores = loadFromStorage();
+            let koScores = {};
+            try {
+                const ks = localStorage.getItem(STORAGE_KEY_KO);
+                if (ks) koScores = JSON.parse(ks);
+            } catch (e) { koScores = {}; }
 
             function getGroupScore(g, r, m) { return groupScores[`${g}-${r}-${m}`] || null; }
+
             function setGroupScore(g, r, m, h, a) {
                 const k = `${g}-${r}-${m}`;
                 if (h === '' && a === '') delete groupScores[k];
                 else groupScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null };
+                saveToStorage();
             }
+
             function isComplete(s) { return s && s.home !== null && s.away !== null && !isNaN(s.home) && !isNaN(s.away); }
+
             function getKoScore(round, m) { return koScores[`${round}-${m}`] || null; }
+
             function setKoScore(round, m, h, a) {
                 const k = `${round}-${m}`;
                 if (h === '' && a === '') delete koScores[k];
                 else koScores[k] = { home: h !== '' ? parseInt(h) : null, away: a !== '' ? parseInt(a) : null };
+                saveToStorage();
             }
 
             function calcStandings(gi) {
@@ -689,40 +807,49 @@
                         const sc = getGroupScore(gi, r, m);
                         if (!isComplete(sc)) continue;
                         const det = matchDetails[`${gi}-${r}-${m}`];
-                        const h = det.home, a = det.away;
+                        const h = det.home,
+                            a = det.away;
                         if (!stats[h] || !stats[a]) continue;
-                        stats[h].j++; stats[a].j++;
-                        stats[h].gp += sc.home; stats[h].gc += sc.away;
-                        stats[a].gp += sc.away; stats[a].gc += sc.home;
-                        if (sc.home > sc.away) { stats[h].pts += 3; stats[h].v++; stats[a].d++; }
-                        else if (sc.home < sc.away) { stats[a].pts += 3; stats[a].v++; stats[h].d++; }
-                        else { stats[h].pts += 1; stats[a].pts += 1; stats[h].e++; stats[a].e++; }
+                        stats[h].j++;
+                        stats[a].j++;
+                        stats[h].gp += sc.home;
+                        stats[h].gc += sc.away;
+                        stats[a].gp += sc.away;
+                        stats[a].gc += sc.home;
+                        if (sc.home > sc.away) { stats[h].pts += 3;
+                            stats[h].v++;
+                            stats[a].d++; } else if (sc.home < sc.away) { stats[a].pts += 3;
+                            stats[a].v++;
+                            stats[h].d++; } else { stats[h].pts += 1;
+                            stats[a].pts += 1;
+                            stats[h].e++;
+                            stats[a].e++; }
                     }
                 }
                 teams.forEach(t => stats[t].sg = stats[t].gp - stats[t].gc);
-                const sorted = [...teams].sort((a, b) => stats[b].pts - stats[a].pts || stats[b].sg - stats[a].sg || stats[b].gp - stats[a].gp);
+                const sorted = [...teams].sort((a, b) => stats[b].pts - stats[a].pts || stats[b].sg - stats[a].sg || stats[
+                    b].gp - stats[a].gp);
                 return { sorted, stats };
             }
 
-            function countPlayed(gi) {
-                let c = 0;
-                for (let r = 0; r < 3; r++) for (let m = 0; m < 2; m++) if (isComplete(getGroupScore(gi, r, m))) c++;
-                return c;
-            }
+            function countPlayed(gi) { let c = 0; for (let r = 0; r < 3; r++) for (let m = 0; m < 2; m++) if (isComplete(
+                        getGroupScore(gi, r, m))) c++; return c; }
 
-            function allGroupsComplete() {
-                for (let g = 0; g < 12; g++) if (countPlayed(g) < 6) return false;
-                return true;
-            }
+            function allGroupsComplete() { for (let g = 0; g < 12; g++) if (countPlayed(g) < 6) return false; return true; }
 
             function getQualified() {
-                const firsts = [], seconds = [], thirds = [];
+                const firsts = [],
+                    seconds = [],
+                    thirds = [];
                 for (let g = 0; g < 12; g++) {
                     const { sorted, stats } = calcStandings(g);
                     if (sorted.length >= 3 && countPlayed(g) === 6) {
-                        firsts.push({ team: sorted[0], group: groupsData[g][0], pts: stats[sorted[0]].pts, sg: stats[sorted[0]].sg });
-                        seconds.push({ team: sorted[1], group: groupsData[g][0], pts: stats[sorted[1]].pts, sg: stats[sorted[1]].sg });
-                        thirds.push({ team: sorted[2], group: groupsData[g][0], pts: stats[sorted[2]].pts, sg: stats[sorted[2]].sg, gp: stats[sorted[2]].gp });
+                        firsts.push({ team: sorted[0], group: groupsData[g][0], pts: stats[sorted[0]].pts, sg: stats[sorted[
+                                0]].sg });
+                        seconds.push({ team: sorted[1], group: groupsData[g][0], pts: stats[sorted[1]].pts, sg: stats[sorted[
+                                1]].sg });
+                        thirds.push({ team: sorted[2], group: groupsData[g][0], pts: stats[sorted[2]].pts, sg: stats[sorted[2]]
+                                .sg, gp: stats[sorted[2]].gp });
                     }
                 }
                 thirds.sort((a, b) => b.pts - a.pts || b.sg - a.sg || b.gp - a.gp);
@@ -735,10 +862,13 @@
                 const matches = [];
                 const fSorted = [...firsts].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
                 const sSorted = [...seconds].sort((a, b) => b.pts - a.pts || b.sg - a.sg);
-                for (let i = 0; i < 8; i++) matches.push({ t1: fSorted[i].team, t2: thirds[i]?.team || "?", g1: fSorted[i].group, g2: thirds[i]?.group || "?" });
+                for (let i = 0; i < 8; i++) matches.push({ t1: fSorted[i].team, t2: thirds[i]?.team || "?", g1: fSorted[i]
+                        .group, g2: thirds[i]?.group || "?" });
                 const rf = fSorted.slice(8);
-                for (let i = 0; i < 4; i++) matches.push({ t1: rf[i]?.team || "?", t2: sSorted[i + 8]?.team || sSorted[i]?.team || "?", g1: rf[i]?.group || "?", g2: sSorted[i + 8]?.group || "?" });
-                for (let i = 0; i < 4; i++) matches.push({ t1: sSorted[i].team, t2: sSorted[i + 4].team, g1: sSorted[i].group, g2: sSorted[i + 4].group });
+                for (let i = 0; i < 4; i++) matches.push({ t1: rf[i]?.team || "?", t2: sSorted[i + 8]?.team || sSorted[i]
+                        ?.team || "?", g1: rf[i]?.group || "?", g2: sSorted[i + 8]?.group || "?" });
+                for (let i = 0; i < 4; i++) matches.push({ t1: sSorted[i].team, t2: sSorted[i + 4].team, g1: sSorted[i].group,
+                        g2: sSorted[i + 4].group });
                 return matches.slice(0, 16);
             }
 
@@ -767,7 +897,7 @@
                 return { r16, qf, sf, fin, champ };
             }
 
-            // ============ RENDER ============
+            // ============ RENDERIZAÇÃO ============
             const $ = id => document.getElementById(id);
             const groupsGrid = $('groupsGrid');
             const groupDetail = $('groupDetail');
@@ -779,8 +909,14 @@
             const sfContent = $('sfContent');
             const finalContent = $('finalContent');
             const panels = {
-                groups: $('panelGroups'), matches: $('panelMatches'), thirds: $('panelThirds'),
-                r32: $('panelR32'), r16: $('panelR16'), qf: $('panelQF'), sf: $('panelSF'), final: $('panelFinal')
+                groups: $('panelGroups'),
+                matches: $('panelMatches'),
+                thirds: $('panelThirds'),
+                r32: $('panelR32'),
+                r16: $('panelR16'),
+                qf: $('panelQF'),
+                sf: $('panelSF'),
+                final: $('panelFinal')
             };
             const tabBtns = document.querySelectorAll('.tab-btn');
 
@@ -813,16 +949,20 @@
             <div class="detail-title">${g[0]}</div>
             <div class="section-title">📊 Classificação (${pc}/6 jogos)</div>
             <table><thead><tr><th>Pos</th><th>Seleção</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th></tr></thead><tbody>`;
-                if (pc === 0) h += '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>';
+                if (pc === 0) h +=
+                    '<tr><td colspan="10" style="text-align:center;padding:1.5rem;">⚽ Nenhum jogo ainda</td></tr>';
                 else sorted.forEach((t, idx) => {
                     const s = stats[t];
                     let rc = '';
-                    if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc = 'row-eliminated'; }
-                    h += `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`;
+                    if (ap) { if (idx < 2) rc = 'row-qualified'; else if (idx === 2) rc = 'row-third'; else rc =
+                            'row-eliminated'; }
+                    h +=
+                        `<tr class="${rc}"><td>${idx + 1}º</td><td class="team-cell">${t}</td><td><strong>${s.pts}</strong></td><td>${s.j}</td><td>${s.v}</td><td>${s.e}</td><td>${s.d}</td><td>${s.gp}</td><td>${s.gc}</td><td>${s.sg > 0 ? '+' + s.sg : s.sg}</td></tr>`;
                 });
                 h += `</tbody></table><div class="section-title">⚽ Confrontos</div>`;
                 for (let r = 0; r < 3; r++) {
-                    h += `<div style="font-weight:700;color:#fedd00;margin-top:0.6rem;">Rodada ${r + 1}</div>`;
+                    h +=
+                    `<div style="font-weight:700;color:#fedd00;margin-top:0.6rem;">Rodada ${r + 1}</div>`;
                     for (let m = 0; m < 2; m++) {
                         const det = matchDetails[`${gi}-${r}-${m}`];
                         const sc = getGroupScore(gi, r, m);
@@ -846,7 +986,7 @@
                 });
             }
 
-            window.backToGroups = function () {
+            window.backToGroups = function() {
                 groupDetail.style.display = 'none';
                 groupsGrid.style.display = '';
                 renderGroups();
@@ -854,7 +994,9 @@
             };
 
             function groupScoreHandler() {
-                const gi = parseInt(this.dataset.g), r = parseInt(this.dataset.r), m = parseInt(this.dataset.m);
+                const gi = parseInt(this.dataset.g),
+                    r = parseInt(this.dataset.r),
+                    m = parseInt(this.dataset.m);
                 const row = this.closest('.match-row');
                 const hv = row.querySelector('.gs-home').value.trim();
                 const av = row.querySelector('.gs-away').value.trim();
@@ -891,10 +1033,11 @@
             function renderAllMatches() {
                 allMatchesContent.innerHTML = groupsData.map((g, gi) => {
                     const pc = countPlayed(gi);
-                    let h = `<div class="detail-title" style="font-size:1.2rem;">${g[0]} (${pc}/6)</div>`;
+                    let h =
+                        `<div class="detail-title" style="font-size:1.2rem;">${g[0]} (${pc}/6)</div>`;
                     for (let r = 0; r < 3; r++) {
                         h +=
-                        `<div style="font-weight:700;color:#fedd00;margin-top:0.5rem;">Rodada ${r + 1}</div>`;
+                            `<div style="font-weight:700;color:#fedd00;margin-top:0.5rem;">Rodada ${r + 1}</div>`;
                         for (let m = 0; m < 2; m++) {
                             const det = matchDetails[`${gi}-${r}-${m}`];
                             const sc = getGroupScore(gi, r, m);
@@ -928,8 +1071,8 @@
             }
 
             function renderKoStage(round, matches, container, title) {
-                if (!matches.length) { container.innerHTML =
-                        '<div class="info-msg">Preencha todos os grupos primeiro.</div>'; return; }
+                if (!matches || !matches.length) { container.innerHTML =
+                        '<div class="info-msg">Preencha todos os grupos primeiro para gerar os confrontos.</div>'; return; }
                 let h = `<div class="bracket-round"><h3>${title}</h3>`;
                 matches.forEach((m, i) => {
                     const sc = getKoScore(round, i);
@@ -1001,9 +1144,7 @@
             }
 
             function switchTab(tabId) {
-                tabBtns.forEach(b => {
-                    b.classList.toggle('active', b.dataset.tab === tabId);
-                });
+                tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
                 Object.keys(panels).forEach(k => panels[k].classList.remove('active'));
                 const map = { groups: 'groups', matches: 'matches', thirds: 'thirds', r32: 'r32', r16: 'r16', qf: 'qf',
                     sf: 'sf', final: 'final' };
@@ -1042,10 +1183,9 @@
                 }
             }
             themeToggle.addEventListener('click', () => setTheme(body.classList.contains('light-mode') ? 'dark' :
-                'light'));
+            'light'));
 
-            // Bloquear não-números nos inputs
-            document.addEventListener('keydown', function (e) {
+            document.addEventListener('keydown', function(e) {
                 if (e.target.classList.contains('score-input')) {
                     const allowed = [8, 46, 9, 27, 13, 37, 38, 39, 40];
                     if (allowed.includes(e.keyCode) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e
